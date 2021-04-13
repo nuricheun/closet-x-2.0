@@ -1,0 +1,18 @@
+import { connect } from "react-redux";
+import OutfitCanvas from "./outfit_canvas";
+import { createOutfit } from "../../action/outfit_action"
+import { withRouter } from "react-router";
+
+const mstp = (state, ownProps) => {
+  return {
+    user: state.session.user.id
+  };
+};
+
+const mdtp = dispatch => {
+  return {
+    createOutfit: outfit => dispatch(createOutfit(outfit))
+  };
+};
+
+export default withRouter(connect(mstp, mdtp)(OutfitCanvas))
