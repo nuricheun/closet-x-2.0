@@ -11,8 +11,6 @@ export const OutfitCanvas = ({items, connectDropTarget, onDrop, drop, user, crea
         title: ""
     })
 
-
-
     useEffect(() => {
         if(didMountRef.current){
             setState({imageURLs : [],
@@ -91,11 +89,11 @@ export const OutfitCanvas = ({items, connectDropTarget, onDrop, drop, user, crea
     setState({startX: mx, startY: my})
   }
 
-  onMouseUp(e) {
+  const onMouseUp = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    setState({isDragging: false});
+    setState({["isDragging"]: false});
     let curr;
 
     for(var i=0; i < items.length; i++){
