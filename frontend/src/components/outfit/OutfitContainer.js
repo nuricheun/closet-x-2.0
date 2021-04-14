@@ -1,15 +1,15 @@
 import { connect } from "react-redux";
 import Outfit from "./outfit_component";
 
-const mSTP = ({ state, ownProps }) => {
+const mapStateToProps = ({ state, ownProps }) => {
   return {};
 };
 
-const mDTP = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {};
 };
 
 export default connect(
-  mSTP,
-  mDTP
+  mapStateToProps,
+  mapDispatchToProps
 )(Outfit);

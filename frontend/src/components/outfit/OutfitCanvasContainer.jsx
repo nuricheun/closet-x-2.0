@@ -3,16 +3,16 @@ import OutfitCanvas from "./outfit_canvas";
 import { createOutfit } from "../../action/outfit_action"
 import { withRouter } from "react-router";
 
-const mstp = (state, ownProps) => {
+const mapStateToProps = ({session:{user:{id}}}) => {
   return {
-    user: state.session.user.id
+    user: id
   };
 };
 
-const mdtp = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     createOutfit: outfit => dispatch(createOutfit(outfit))
   };
 };
 
-export default withRouter(connect(mstp, mdtp)(OutfitCanvas))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OutfitCanvas))

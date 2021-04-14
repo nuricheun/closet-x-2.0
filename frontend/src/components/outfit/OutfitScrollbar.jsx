@@ -1,8 +1,9 @@
 import {useState, useEffect, useRef} from "react";
-// import ItemIndex from "../items/item_index";
-import ItemSliderShow from "./item_slide_show";
+import ItemSliderShow from "./ItemSlideShow";
+import './outfit.css';
 
-const OutfitScrollbar = ({fetchAllItems, userId, items}) => {
+
+export const OutfitScrollbar = ({fetchAllItems, userId, items}) => {
   
  
   const [state, setState] = useState({
@@ -16,7 +17,7 @@ const OutfitScrollbar = ({fetchAllItems, userId, items}) => {
   useEffect(() => {
     if(loading.current && items.length > 0){
       fetchAllItems(userId)
-      .then(()=> setState({['itemsLeft']: items.length-3}))
+      .then(()=> setState({...state, itemsLeft: items.length-3}))
       .then(() => loading.current = false)
     }
   }, [])
@@ -31,11 +32,13 @@ const OutfitScrollbar = ({fetchAllItems, userId, items}) => {
     // prev <= 0 to prevent over scrolling
     if (arg === "prev" && translateDelta + delta <= 0) {
       setState({
+        ...state,
         translateDelta: translateDelta + delta,
         itemsLeft: itemsLeft + 3
       });
     } else if (arg === "next" && itemsLeft >= 0) {
       setState({
+        ...state,
         translateDelta: translateDelta - delta,
         itemsLeft: itemsLeft - 3
       });

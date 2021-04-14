@@ -1,4 +1,4 @@
-import * as ItemAPIUtil from "../util/item_api_util";
+import * as ItemAPIUtil from "../util/itemApiUtil";
 
 export const RECEIVE_ALL_ITEMS = "RECEIVE_ALL_ITEMS";
 export const RECEIVE_ITEM = "RECEIVE_ITEM";

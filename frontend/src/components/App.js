@@ -1,7 +1,9 @@
 import {Switch, Redirect} from "react-router-dom";
-import {AuthRoute, ProtectedRoute} from "../util/route_util";
+import {AuthRoute, ProtectedRoute} from "../util/routeUtil";
 
 import MainPage from "./main/Main";
+import OutfitScrollbar from './outfit/OutfitScrollbarContainer'
+
 import './App.css';
 
 function App() {
@@ -10,7 +12,8 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <AuthRoute exact path="/" component={MainPage} />
+        {/* <AuthRoute exact path="/" component={MainPage} /> */}
+        <AuthRoute path="/" component={OutfitScrollbar}/>
         <Redirect from="/" to="/" />
       </Switch>
     </div>

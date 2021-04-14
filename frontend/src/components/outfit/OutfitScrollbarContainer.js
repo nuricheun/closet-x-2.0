@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
-import { fetchAllItems } from "../../actions/item_actions";
-import OutfitScrollbar from "./outfit_scrollbar";
+import { fetchAllItems } from "../../action/itemAction";
+import OutfitScrollbar from "./OutfitScrollbar";
 
-const mapStateToProps = state => {
+const mapStateToProps = ({session:{user:{id}}, entities:{items}}) => {
   return {
-    userId: state.session.user.id,
-    items: Object.values(state.entities.items),
+    userId: id,
+    items: Object.values(items),
   };
 };
 

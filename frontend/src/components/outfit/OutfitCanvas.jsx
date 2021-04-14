@@ -13,12 +13,11 @@ export const OutfitCanvas = ({items, connectDropTarget, onDrop, drop, user, crea
 
     useEffect(() => {
         if(didMountRef.current){
-            setState({imageURLs : [],
-        itemIDs: []});
-      for(let i = 0; i < items.length; i++) {
-        setState({imageURLs : [...state.imageURLs, items[i].image.src],
-          itemIDs: [...state.itemIDs, items[i].id]})
-      }
+            setState({imageURLs : [],itemIDs: []});
+        for(let i = 0; i < items.length; i++) {
+          setState({imageURLs : [...state.imageURLs, items[i].image.src],
+            itemIDs: [...state.itemIDs, items[i].id]})
+        }
 
       let canvas = document.getElementById("canvas");
       let ctx = canvas.getContext("2d");

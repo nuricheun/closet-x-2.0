@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Banner from "./banner";
+import Banner from "./Banner";
 import { logout } from "../../actions/session_actions";
 
 const mSTP = start => {
