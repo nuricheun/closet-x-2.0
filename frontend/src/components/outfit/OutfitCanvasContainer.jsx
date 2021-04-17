@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import OutfitCanvas from "./outfit_canvas";
-import { createOutfit } from "../../action/outfit_action"
+import { createOutfit } from "../../action/outfitAction"
 import { withRouter } from "react-router";
 
 const mapStateToProps = ({session:{user:{id}}}) => {

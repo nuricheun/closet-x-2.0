@@ -1,10 +1,10 @@
 import { Switch, Route } from "react-router-dom";
-import NavBarContainer from "./navbar/NavbarContainer";
-import Banner from "./banner/banner_container";
-import DashboardContainer from "./dashboard/dashboard_container";
-import NewItemContainer from "./items/new_item_container";
-import OutfitCreate from "./outfit/outfit_create";
-import ItemIndexContainer from "../components/items/item_index_container";
+import NavBarContainer from "../navbar/NavbarContainer";
+import Banner from "../banner/bannerContainer";
+import DashboardContainer from "../dashboard/DashboardContainer";
+import NewItemContainer from "../item/newItemContainer";
+import OutfitCreate from "../outfit/outfitCreate";
+import ItemIndexContainer from "../item/itemIndexContainer";
 
 const UserView = () => {
   return (

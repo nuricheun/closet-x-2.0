@@ -1,33 +1,26 @@
-import React from "react";
 import { DragSource } from "react-dnd";
 
 const imageSource = {
-  beginDrag(props, monitor, component) {
-    const id = props.item._id;
+  beginDrag(item, monitor, component) {
+    const id = item._id;
     const initialPos = monitor.getClientOffset();
-    const source = props.item.imageURL;
-    const width = props.item.width;
+    const source = item.imageURL;
+    const width = item.width;
     return {id, initialPos, source, width};
     
   }
 }
 
-function collect(connect, monitor) {
+const collect = (connect, monitor) => {
   return {
     connectDragSource: connect.dragSource(),
     posDiff: monitor.getDifferenceFromInitialOffset()
   };
 }
 
-class ItemSliderShow extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { imageURL, title } = this.props.item;
-    const { translateDelta, connectDragSource } = this.props;
+const ItemSliderShow = ({item, translateDelta, connectDragSource}) => {
+    
+    const { imageURL, title } = item;
 
     return connectDragSource(
       <div
@@ -41,6 +34,6 @@ class ItemSliderShow extends React.Component {
       </div>
     );
   }
-}
+
 
 export default DragSource("image", imageSource, collect)(ItemSliderShow);

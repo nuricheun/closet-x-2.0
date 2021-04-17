@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { fetchAllItems } from "../../action/item_action";
+import { fetchAllItems } from "../../action/itemAction";
 import ItemIndex from "./ItemIndex";
 
 const mapStateToProps = (state, ownProps) => {
