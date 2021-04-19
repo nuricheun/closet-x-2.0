@@ -1,25 +1,29 @@
-from flask import (Blueprint, session, request, url_for, current_app)
+from flask import (Blueprint, session, request, url_for, current_app, jsonify)
 from ..extensions import mongodb
 from ..file_upload import upload_file
-import jsonify
+
 
 items_bp = Blueprint('items', __name__)
 items = mongodb.db.items
 
 
-@items_bp.route('/item/', methods=['GET'])
+@items_bp.route('/api/item/<id>', methods=['GET'])
 def get_item():
+    output = request.args.get('id', default=1, type=int)
+    return jsonify(list(output))
 
-    print(request.args.get('id', default=1, type=int))
-    return "item"
 
-
-@items_bp.route('/items', methods=['GET'])
+@items_bp.route('/api/items', methods=['GET'])
 def get_items():
-    return "items!"
+    output = []
+    for item in items.find():
+        output.append({'name': item['name']})
+
+    print(output)
+    return jsonify(output)
 
 
-@items_bp.route('/add', methods=['POST'])
+@ items_bp.route('/api/add', methods=['POST'])
 def add_item():
 
     img_url = None

@@ -2,32 +2,34 @@
 
 import {useState, useEffect} from "react";
 
-const LoginModal = ({login, show, hideLoginModal, history, currentUser}) => {
-    
-    const [loginInfo, setLoginInfo] = useState({
+const LoginModal = ({currentUser, hideLoginModal, history, errors, login, show}) => {
+  
+  const [state, setState] = useState({
+      username: "",
       email: "",
       password: ""
     })
 
-
+    
   useEffect(() => {
-    if (currentUser === true) {
-      hideLoginModal();
-      history.push("/dashboard");
+    if(currentUser){
+        if (currentUser === true) {
+          hideLoginModal();
+          history.push("/dashboard");
+        }
     }
+  }, [])
 
-  //   this.setState({ errors: nextProps.errors });
-  }, [currentUser])
 
   const handleInput = (type) => {
-    return e => setLoginInfo({ [type]: e.target.value });
+    return e => setState({ [type]: e.target.value });
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let user = {
-      email: loginInfo["email"],
-      password: loginInfo["password"]
+      email: state.email,
+      password: state.password
     };
     login(user);
   }
@@ -41,20 +43,20 @@ const LoginModal = ({login, show, hideLoginModal, history, currentUser}) => {
     login(user);
   }
 
-  // const renderErrors = () => {
-  //   return (
-  //     <ul>
-  //       {Object.keys(errors).map((error, i) => (
-  //         <li key={`error-${i}`}>{errors[error]}</li>
-  //       ))}
-  //     </ul>
-  //   );
-  // }
+  const renderErrors = () => {
+    return (
+      <ul>
+        {Object.keys(errors).map((error, i) => (
+          <li key={`error-${i}`}>{errors[error]}</li>
+        ))}
+      </ul>
+    );
+  }
 
-  
-    const showHideClassName = show
-      ? "login-modal-background display-block"
-      : "login-modal-background display-none";
+ 
+  const showHideClassName = show
+    ? "login-modal-background display-block"
+    : "login-modal-background display-none";
 
     return (
       <div className={showHideClassName}>
@@ -66,7 +68,7 @@ const LoginModal = ({login, show, hideLoginModal, history, currentUser}) => {
               <label>
                 Email:
                 <br />
-                <input type="text" onChange={()=>handleInput("email")} />
+                <input type="text" onChange={handleInput("email")} />
               </label>
               <br />
               <label>
@@ -74,7 +76,7 @@ const LoginModal = ({login, show, hideLoginModal, history, currentUser}) => {
                 <br />
                 <input
                   type="password"
-                  onChange={()=>handleInput("password")}
+                  onChange={handleInput("password")}
                 />
               </label>
               <br />
@@ -89,6 +91,7 @@ const LoginModal = ({login, show, hideLoginModal, history, currentUser}) => {
         </div>
       </div>
     );
+  
 }
 
 export default LoginModal;

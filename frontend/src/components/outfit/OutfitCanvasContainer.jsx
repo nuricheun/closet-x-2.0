@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import OutfitCanvas from "./outfit_canvas";
+import OutfitCanvas from "./OutfitCanvas";
 import { createOutfit } from "../../action/outfitAction"
 import { withRouter } from "react-router";
 

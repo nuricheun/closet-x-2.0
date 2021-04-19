@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 
-const NavBar = ({match, logout}) => {
+export const NavBar = ({match, logout}) => {
   const handleClick = () => {
     let clicker = document.getElementById("modal-text");
     clicker.click();
@@ -27,4 +27,3 @@ const NavBar = ({match, logout}) => {
   
 }
 
-export default NavBar;

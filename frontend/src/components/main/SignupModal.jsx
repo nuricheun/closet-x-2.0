@@ -19,7 +19,7 @@ const SignupModal = ({currentUser, signup, show, hideLoginModal, history}) => {
       history.push("/dashboard");
     }
 
-  //   this.setState({ errors: nextProps.errors });
+  //   setState({ errors: nextProps.errors });
   }, [currentUser])
 
   const handleInput = (type) => {

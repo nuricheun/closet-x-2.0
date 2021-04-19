@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Outfit from "./outfit_component";
+import Outfit from "./Outfit";
 
 const mapStateToProps = ({ state, ownProps }) => {
   return {};

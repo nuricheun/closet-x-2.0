@@ -1,6 +1,7 @@
 import { withRouter } from "react-router-dom";
+import './outfit.css'
 
-const OutfitShow = ({outfit, translateDelta}) => {
+const Outfit = ({outfit, translateDelta}) => {
   
 
     const { imageURL, title, username } = outfit;
@@ -19,4 +20,4 @@ const OutfitShow = ({outfit, translateDelta}) => {
     );
   }
 
-export default withRouter(OutfitShow);
+export default withRouter(Outfit);

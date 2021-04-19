@@ -1,10 +1,9 @@
-import {useState} from "react";
 import { withRouter } from "react-router-dom";
-import SliderComponent from "../slider/img_slider_component";
+import SliderComponent from "../slider/ImgSliderComponent";
+import './Dashboard.css'
 
-const Dashboard = (props) => {}
+const Dashboard = (props) => {
  
-    const [state, setState] = useState({})
 
   
     let sampleItems = [

@@ -3,7 +3,7 @@ import LoginModalContainer from "./LoginModalContainer";
 import SignupModalContainer from "./SignupModalContainer";
 import '../../css/main.css'
 
-const Main = () => {
+export const Main = () => {
 
     const [showLoginModal, setLoginModal] = useState(false);
     const [showSignupModal, setSignupModal] = useState(false);
@@ -339,4 +339,4 @@ const Main = () => {
   
 }
 
-export default Main;
+

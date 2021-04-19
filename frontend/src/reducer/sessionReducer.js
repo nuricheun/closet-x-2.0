@@ -4,7 +4,7 @@ import { RECEIVE_CURRENT_USER,
 
 const initialState = {
 isAuthenticated: false,
-user: {}
+user: {id: 1233}
 };
 
 export const sessionReducer = (state = initialState, action) => {

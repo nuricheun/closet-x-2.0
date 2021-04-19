@@ -1,22 +1,20 @@
 import {useState, useEffect} from "react";
-import ItemIndexEach from "./ItemIndexEach";
-import ItemFormContainer from "./newItemContainer";
+import {ItemIndexEach} from "./ItemIndexEach";
+import ItemFormContainer from "./NewItemContainer";
 import ItemShowContainer from "./ItemShowContainer";
 
-const ItemIndex = ({fetchAllItems, items, userId}) => {
+export const ItemIndex = ({fetchAllItems, items, userId, itemModal, newModal, toggleItemModal, toggleNewModal}) => {
 
-    const [modal, setModal] = useState(null)
-    const [itemShowModal, setItemShowModal] = useState(false)
-    const [showNewItemModal, setShowNewItemModal] = useState(false);
-
+  const [itemId, setItemId] = useState(null)
 
   const showNewItemModal = () => {
-    setShowNewItemModal(true)
+    toggleNewModal(true)
     document.addEventListener("click", hideNewItemModal, false);
   }
 
   const itemShowModal = (id) => {
-    this.setState({ itemShowModal: true, modal: id });
+    setItemId(id)
+    toggleItemModal()
     document.addEventListener("click", hideItemShowModal, false);
   }
 
@@ -25,7 +23,7 @@ const ItemIndex = ({fetchAllItems, items, userId}) => {
     if (spot && spot.contains(e.target)) {
       return;
     }
-    setShowNewItemModal(false)
+    toggleNewModal()
     document.removeEventListener("click", hideNewItemModal);
   }
 
@@ -34,7 +32,7 @@ const ItemIndex = ({fetchAllItems, items, userId}) => {
     if (spot && spot.contains(e.target)) {
       return;
     }
-    showItemShowModal(false)
+    toggleItemModal()
     document.removeEventListener("click", hideItemShowModal);
   }
 
@@ -45,14 +43,15 @@ const ItemIndex = ({fetchAllItems, items, userId}) => {
   
 
  
-    let items = items.map(item => (
+    let mapped = items.map(item => (
       <ItemIndexEach key={item._id} itemShowModal={itemShowModal} item={item} />
     ));
+
     let modal = itemShowModal ? (
       <ItemShowContainer
         show={itemShowModal}
         hideItemShowModal={hideItemShowModal}
-        itemId={modal}
+        itemId={itemId}
       />
     ) : (
       <></>
@@ -61,16 +60,16 @@ const ItemIndex = ({fetchAllItems, items, userId}) => {
       <div className="item-index-container">
         {modal}
         <ItemFormContainer
-          show={showNewItemModal}
+          show={newModal}
           hideNewItemModal={hideNewItemModal}
         />
         <div className="item-index-items-container">
-          {items}
+          {mapped}
         </div>
-        <p id="modal-text" className="display-none" onClick={setShowNewItemModal}>Click Me!</p>
+        <p id="modal-text" className="display-none" onClick={showNewItemModal}>Click Me!</p>
       </div>
     );
   
 }
 
-export default ItemIndex;
+

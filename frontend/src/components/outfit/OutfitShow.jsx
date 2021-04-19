@@ -1,6 +1,6 @@
 import { withRouter } from "react-router-dom";
 
-export const OutfitShow = ()=>{
+const OutfitShow = ()=>{
   
 
     const dictionary = {

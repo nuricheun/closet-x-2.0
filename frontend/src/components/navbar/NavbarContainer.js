@@ -1,16 +1,16 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
-import NavBar from "./Navbar";
-import { logout } from "../../action/session_action";
+import {NavBar} from "./Navbar";
+import { logout } from "../../action/sessionAction";
 
-const mstp = state => {
+const mapStateToProps = state => {
   return {};
 };
 
-const mdtp = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     logout: () => dispatch(logout())
   };
 };
 
-export default withRouter(connect(mstp, mdtp)(NavBar));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));

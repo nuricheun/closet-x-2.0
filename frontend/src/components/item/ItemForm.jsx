@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 const ItemForm = ({formType, item, fetchItem, match, history, show, action}) => {
   
-const [state, setstate] = useState({
+const [state, setState] = useState({
     user: '',
     title: '',
     image: '',

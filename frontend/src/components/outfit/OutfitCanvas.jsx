@@ -11,6 +11,8 @@ export const OutfitCanvas = ({items, connectDropTarget, onDrop, drop, user, crea
         title: ""
     })
 
+    
+
     useEffect(() => {
         if(didMountRef.current){
             setState({imageURLs : [],itemIDs: []});
@@ -36,8 +38,8 @@ export const OutfitCanvas = ({items, connectDropTarget, onDrop, drop, user, crea
   
 
   const renderAll = (ctx) => {
-    for(let i = 0; i < pitems.length; i++) {
-      let r = pitems[i];
+    for(let i = 0; i < items.length; i++) {
+      let r = items[i];
       renderToCanvas(ctx, r);
     }
   }
@@ -152,7 +154,6 @@ export const OutfitCanvas = ({items, connectDropTarget, onDrop, drop, user, crea
     formData.append("image", blobData);
     formData.append("imageURL", state.imageURLs);
     formData.append("items", state.itemIDs)
-!
     createOutfit(formData)
     .then(res => history.push("/"));
   }
@@ -188,24 +189,25 @@ export const OutfitCanvas = ({items, connectDropTarget, onDrop, drop, user, crea
   
 }
 
-const spec = {
-  drop(props, monitor, component) {
-    const item = monitor.getItem()
-    let diff = monitor.getDifferenceFromInitialOffset();
-    item.newPos = {x: item.initialPos.x + diff.x, y: item.initialPos.y + diff.y}
-    onDrop(item)
-  }
-}
+    const spec = {
+      drop(props, monitor, component) {
+        const item = monitor.getItem()
+        let diff = monitor.getDifferenceFromInitialOffset();
+        item.newPos = {x: item.initialPos.x + diff.x, y: item.initialPos.y + diff.y}
+        props.onDrop(item)
+      }
+    }
 
-const collect = (connect, monitor) => {
-  return {
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-    isOverCurrent: monitor.isOver({ shallow: true }),
-    canDrop: monitor.canDrop(),
-    clientOffset: monitor.getClientOffset()
-  };
-}
+
+    const collect = (connect, monitor) => {
+      return {
+        connectDropTarget: connect.dropTarget(),
+        isOver: monitor.isOver(),
+        isOverCurrent: monitor.isOver({ shallow: true }),
+        canDrop: monitor.canDrop(),
+        clientOffset: monitor.getClientOffset()
+      };
+    }
 
 
 export default DropTarget("image", spec, collect)(OutfitCanvas);

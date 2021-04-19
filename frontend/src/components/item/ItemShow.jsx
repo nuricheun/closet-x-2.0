@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 
-const ItemShow = ({fetchItem, itemId, show, item}) => {
+export const ItemShow = ({fetchItem, itemId, show, item}) => {
 
     useEffect(() => {
         if(itemId){
@@ -29,4 +29,4 @@ const ItemShow = ({fetchItem, itemId, show, item}) => {
     );
 }
 
-export default ItemShow;
+

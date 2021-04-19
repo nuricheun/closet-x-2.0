@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import Banner from "./Banner";
-import { logout } from "../../actions/session_actions";
+import { logout } from "../../action/sessionAction";
 
-const mSTP = start => {
+const mapStateToProps = start => {
   return {
 
   };
@@ -14,4 +14,4 @@ const mDTP = dispatch => {
   };
 };
 
-export default connect(mSTP, mDTP)(Banner);
+export default connect(mapStateToProps, mDTP)(Banner);

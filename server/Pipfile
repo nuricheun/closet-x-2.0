@@ -5,11 +5,11 @@ name = "pypi"
 
 [packages]
 flask = "*"
-flask-pymongo = "*"
 jsonify = "*"
-boto3 = "*"
 cloudinary = "*"
 python-dotenv = "*"
+flask-pymongo = "*"
+pymongo = "*"
 
 [dev-packages]
 

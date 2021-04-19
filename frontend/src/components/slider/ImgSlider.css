@@ -1,0 +1,16 @@
+.img-slider {
+  width: 100%;
+}
+
+.outfit-index {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.dashboard-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  align-self: flex-end;
+}

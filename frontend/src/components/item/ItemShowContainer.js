@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import { fetchItem } from "../../action/item_action";
-import ItemShow from "./ItemShow";
+import { fetchItem } from "../../action/itemAction";
+import {ItemShow} from "./ItemShow";
 
 const mapStateToProps = (state, ownProps) => {
   if (!ownProps.itemId) {

@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { createItem } from "../../action/item_action";
+import { createItem } from "../../action/itemAction";
 import ItemForm from "./ItemForm";
 
 const mapStateToProps = (state, ownProps) => {

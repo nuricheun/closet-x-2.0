@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Dashboard from "./Dashboard";
-import { logout } from "../../actions/session_actions";
+import { logout } from "../../action/sessionAction";
 // import fetchOutfits
 
 const mapStateToProps = state => {
