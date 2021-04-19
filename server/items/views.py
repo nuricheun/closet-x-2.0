@@ -43,6 +43,6 @@ def add_item():
     }
 
     item_id = items.insert(new_item)
-    res = items.find_one_or_404({"_id": item_id})
+    res = items.find_one_or_404({"_id": ObjectId(item_id)})
 
     return dumps(res)

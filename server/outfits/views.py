@@ -10,24 +10,32 @@ outfits = mongodb.db.outfits
 
 @outfits_bp.route('/<id>', methods=['GET'])
 def get_outfit():
-    outfit_param = request.args.outfit_id
-    res = outfits.find_one_or_404(outfit_param)
-    return 'get outfit'
+    outfit_param = request.args.get('outfitId', default=0, type=int)
+    res = outfits.find_one_or_404({"_id": ObjectId(item_id)})
+    return dumps(res)
 
 
 @outfits_bp.route('/', methods=['GET'])
 def get_outfits():
     res = outfits.find().sort([('timestamp', -1)]).limit(3)
-    return 'get outfits'
+    return dumps(res)
 
 
 @outfits_bp.route('/', methods=['GET'])
 def add_outfit():
-    img_url = ""
-    requeset_data = request.get_json()
-    user, title = requeset_data.values()
+    img_url = None
+    title = request.form['title']
+    file_to_upload = request.files['file']
+
+    if(file_to_upload):
+        img_url = upload_file(file_to_upload)
+
     newOutfit = {
-        user: user,
-        title: title,
-        imageURL: img_url
+        # user: user,
+        "title": title,
+        "imageURL": img_url
     }
+    outfit_id = outfits.insert(newOutfit)
+    res = outfits.find_one_or_404({"_id": ObjectId(outfit_id)})
+
+    return dumps()
