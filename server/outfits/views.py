@@ -4,7 +4,7 @@ from ..file_upload import upload_file
 from bson.objectid import ObjectId
 from bson.json_util import dumps
 
-outfits_bp = Blueprint('outfits', __name__, url_prefix='/outfits')
+outfits_bp = Blueprint('outfits', __name__, url_prefix='/api')
 outfits = mongodb.db.outfits
 
 

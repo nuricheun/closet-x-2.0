@@ -10,6 +10,8 @@ cloudinary = "*"
 python-dotenv = "*"
 flask-pymongo = "*"
 pymongo = "*"
+flask-jwt-extended = "*"
+bcrypt-flask = "*"
 
 [dev-packages]
 

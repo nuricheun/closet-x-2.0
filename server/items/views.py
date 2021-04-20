@@ -1,14 +1,14 @@
-from flask import (Blueprint, session, request, url_for, current_app, jsonify)
+from flask import (Blueprint, session, request, url_for)
 from ..extensions import mongodb
 from ..file_upload import upload_file
 from bson.objectid import ObjectId
 from bson.json_util import dumps
 
-items_bp = Blueprint('items', __name__)
+items_bp = Blueprint('items', __name__, url_prefix='/api')
 items = mongodb.db.items
 
 
-@items_bp.route('/api/item', methods=['GET'])
+@items_bp.route('/item', methods=['GET'])
 def get_item():
     item_id = request.args.get(
         'id', default="606df9399413b4baccbb7b43", type=int)
@@ -16,13 +16,13 @@ def get_item():
     return dumps(output)
 
 
-@items_bp.route('/api/items', methods=['GET'])
+@items_bp.route('/items', methods=['GET'])
 def get_items():
     output = items.find()
     return dumps(output)
 
 
-@ items_bp.route('/api/add', methods=['POST'])
+@ items_bp.route('/add', methods=['POST'])
 def add_item():
 
     img_url = None
