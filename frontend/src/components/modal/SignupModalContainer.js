@@ -1,18 +1,18 @@
 import { connect } from "react-redux";
 import { signup } from "../../action/sessionAction";
+import { toggleSignupModal } from "../../action/modalAction";
 import SignupModal from "./SignupModal";
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({entities:{modal:{signupModal}}}) => {
   return {
-    show: ownProps.show,
-    // errors: state.errors.session,
-    hideSignupModal: ownProps.hideSignupModal
+    show: signupModal
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    signup: user => dispatch(signup(user))
+    signup: user => dispatch(signup(user)),
+    toggleSignupModal: () => dispatch(toggleSignupModal())
   };
 };
 

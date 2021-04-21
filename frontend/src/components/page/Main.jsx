@@ -1,41 +1,9 @@
-import {useState} from "react";
-import LoginModalContainer from "./LoginModalContainer";
-import SignupModalContainer from "./SignupModalContainer";
-import '../../css/main.css'
+import LoginModalContainer from "../modal/LoginModalContainer";
+import SignupModalContainer from "../modal/SignupModalContainer";
+import './mainpage.css'
+import './main.css'
 
-export const Main = () => {
-
-    const [showLoginModal, setLoginModal] = useState(false);
-    const [showSignupModal, setSignupModal] = useState(false);
-
-  const showLoginModalFn = () => {
-    setLoginModal(true)
-    document.addEventListener("click", hideLoginModal, false);
-  }
-
-  const hideLoginModal = (e) => {
-    let spot = document.querySelector(".login-form-container");
-    if (spot && spot.contains(e.target)) {
-      return;
-    }
-    setLoginModal(false)
-    document.removeEventListener("click", hideLoginModal);
-  }
-
-  const showSignupModalFn = () => {
-    setSignupModal(true)
-    document.addEventListener("click", hideSignupModal, false);
-  }
-
-  const hideSignupModal = (e) => {
-    let spot = document.querySelector(".signup-form-container");
-    if (spot && spot.contains(e.target)) {
-      return;
-    }
-    setSignupModal(false)
-    document.removeEventListener("click", hideSignupModal);
-  }
-
+export const Main = ({toggleSignupModal, toggleSigninModal}) => {
   
     return (
       <div className="main-page-container">
@@ -57,12 +25,12 @@ export const Main = () => {
                 <ul>
                   <li>
                     <div className="icon solid fa-user">
-                      <span>Login</span>
+                      <span onClick={toggleSigninModal}>Login</span>
                     </div>
                   </li>
                   <li >
                     <div className="icon solid fa-sitemap">
-                      <span>Signup</span>
+                      <span onClick={toggleSignupModal}>Signup</span>
                     </div>
                   </li>
                 </ul>
@@ -144,7 +112,7 @@ export const Main = () => {
                   <ul className="actions">
                     <li>
                       <div
-                        onClick={showSignupModal}
+                        onClick={toggleSignupModal}
                         href="#"
                         className="button icon solid fa-sitemap"
                       >
@@ -211,7 +179,7 @@ export const Main = () => {
                   <ul className="actions">
                     <li>
                       <div
-                        onClick={showSignupModal}
+                        onClick={toggleSignupModal}
                         href="#"
                         className="button icon solid fa-sitemap"
                       >
@@ -326,14 +294,8 @@ export const Main = () => {
             </div>
           </section>
         </div>
-        <LoginModalContainer
-          show={showLoginModal}
-          hideLoginModal={hideLoginModal}
-        />
-        <SignupModalContainer
-          show={showSignupModal}
-          hideSignupModal={hideSignupModal}
-        />
+        <LoginModalContainer/>
+        <SignupModalContainer/>
       </div>
     );
   

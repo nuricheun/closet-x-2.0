@@ -1,17 +1,12 @@
 from flask import (Blueprint, session, request,
                    url_for, current_app, abort, jsonify)
-from ..extensions import mongodb
+from ..extensions import mongodb, bcrypt
 from bson.objectid import ObjectId
 from bson.json_util import dumps
-from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt_identity
-from flask_jwt_extended import jwt_required
-from flask_jwt_extended import JWTManager
-from flask_bcrypt import Bcrypt
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 
 users_bp = Blueprint('users', __name__, url_prefix='/api')
-bcrypt = Bcrypt()
 users = mongodb.db.users
 
 
@@ -26,10 +21,10 @@ def register():
     email = request.form["email"]
     password = request.form["password"]
 
-    email_found = dumps(users.find({"email": email}))
+    email_found = users.find_one({"email": email})
 
-    if len(email_found) > 0:
-        return jsonify({"msg": "Bad username or password"}), 401
+    if email_found:
+        return jsonify({"msg": "User already exists"}), 401
 
     pw_hash = bcrypt.generate_password_hash(password)
 
@@ -45,19 +40,16 @@ def register():
 
 @users_bp.route('/login', methods=['POST'])
 def login():
+
     email = request.form["email"]
     password = request.form["password"]
-    email_found = users.find({"email": email})
 
-    if email_found.count() == 0:
-        return "user information or password don't match"
+    email_found = users.find_one({"email": email})
 
-    pw_hash = dumps(email_found)
-    print(pw_hash)
-    password_correct = bcrypt.check_password_hash(pw_hash, password)
+    if email_found == None or bcrypt.check_password_hash(
+            pw_hash, email_found["password"]) == False:
+        return "User information or password don't match"
 
-    if not password_correct:
-        return "user information or password don't match"
-
-    access_token = create_access_token(identity=username)
+    access_token = create_access_token(identity=email)
+    refresh_token = create_refresh_token(identity=email)
     return jsonify(access_token=access_token)

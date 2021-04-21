@@ -1,8 +1,10 @@
 //MODAL DESIGN INSPIRED BY: https://codepen.io/alligatorio/pen/aYzMKL
 
 import {useState, useEffect} from "react";
+import './modal.css';
+import './signupmodal.css';
 
-const SignupModal = ({currentUser, signup, show, hideLoginModal, history}) => {
+const SignupModal = ({signup, show, toggleSignupModal}) => {
 
     
     const [userinfo, setUserInfo] = useState({
@@ -13,14 +15,12 @@ const SignupModal = ({currentUser, signup, show, hideLoginModal, history}) => {
     })
   
 
-  useEffect(() => {
-    if (currentUser === true) {
-      hideLoginModal();
-      history.push("/dashboard");
-    }
-
-  //   setState({ errors: nextProps.errors });
-  }, [currentUser])
+  // useEffect(() => {
+  //   if (currentUser === true) {
+  //     toggleSignupModal();
+  //     history.push("/dashboard");
+  //   }
+  // }, [currentUser])
 
   const handleInput = (type) => {
     return e => setUserInfo({ [type]: e.target.value });
@@ -46,10 +46,10 @@ const SignupModal = ({currentUser, signup, show, hideLoginModal, history}) => {
       : "signup-modal-background display-none";
 
     return (
-      <div className={showHideClassName}>
+      <div className={showHideClassName} onClick={toggleSignupModal}>
         <div className="modal-subcontainer">
-          <div className={"signup-form-container"}>
-            <div className="signup-form-header">Sign Up!</div>
+          <div className="form-container">
+            <div className="signup-form-header">Sign Up</div>
             <br />
             <form onSubmit={handleSubmit}>
               <label>
@@ -82,7 +82,7 @@ const SignupModal = ({currentUser, signup, show, hideLoginModal, history}) => {
                 />
               </label>
               <br />
-              <div className="login-buttons">
+              <div className="auth-buttons">
                 <button onClick={handleSubmit}>Sign Up</button>
               </div>
               {/* {renderErrors()} */}

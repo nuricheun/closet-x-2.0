@@ -3,6 +3,7 @@ from ..extensions import mongodb
 from ..file_upload import upload_file
 from bson.objectid import ObjectId
 from bson.json_util import dumps
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 outfits_bp = Blueprint('outfits', __name__, url_prefix='/api')
 outfits = mongodb.db.outfits
@@ -22,8 +23,10 @@ def get_outfits():
 
 
 @outfits_bp.route('/', methods=['GET'])
+@jwt_required()
 def add_outfit():
     img_url = None
+    current_user = get_jwt_identity()
     title = request.form['title']
     file_to_upload = request.files['file']
 
@@ -31,10 +34,11 @@ def add_outfit():
         img_url = upload_file(file_to_upload)
 
     newOutfit = {
-        # user: user,
+        "user": current_user,
         "title": title,
         "imageURL": img_url
     }
+
     outfit_id = outfits.insert(newOutfit)
     res = outfits.find_one_or_404({"_id": ObjectId(outfit_id)})
 

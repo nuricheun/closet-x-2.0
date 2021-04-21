@@ -1,8 +1,10 @@
 //MODAL DESIGN INSPIRED BY: https://codepen.io/alligatorio/pen/aYzMKL
 
 import {useState, useEffect} from "react";
+import './modal.css';
+import './loginmodal.css';
 
-const LoginModal = ({currentUser, hideLoginModal, history, errors, login, show}) => {
+const LoginModal = ({toggleSigninModal, errors, login, show}) => {
   
   const [state, setState] = useState({
       username: "",
@@ -11,15 +13,6 @@ const LoginModal = ({currentUser, hideLoginModal, history, errors, login, show})
     })
 
     
-  useEffect(() => {
-    if(currentUser){
-        if (currentUser === true) {
-          hideLoginModal();
-          history.push("/dashboard");
-        }
-    }
-  }, [])
-
 
   const handleInput = (type) => {
     return e => setState({ [type]: e.target.value });
@@ -60,9 +53,9 @@ const LoginModal = ({currentUser, hideLoginModal, history, errors, login, show})
 
     return (
       <div className={showHideClassName}>
-        <div className="modal-subcontainer">
-          <div className={"login-form-container"}>
-            <div className="login-form-header">Login!</div>
+        <div className="modal-subcontainer" onClick={toggleSigninModal}>
+          <div className="form-container">
+            <div className="login-form-header">Login</div>
             <br />
             <form onSubmit={handleSubmit}>
               <label>
@@ -80,7 +73,7 @@ const LoginModal = ({currentUser, hideLoginModal, history, errors, login, show})
                 />
               </label>
               <br />
-              <div className="login-buttons">
+              <div className="auth-buttons">
                 <button onClick={handleSubmit}>Log In</button>
                 <button onClick={handleDemoLogin}>Demo Login</button>
               </div>

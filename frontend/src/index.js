@@ -6,16 +6,16 @@ import {Provider} from 'react-redux'
 import App from './components/App';
 import './index.css';
 
-const store = configureStore()
+const store = configureStore({})
 
 ReactDOM.render(
+  <React.StrictMode>
     <Provider store={store}>
-      <React.StrictMode>
         <HashRouter>
             <App />
         </HashRouter>
-      </React.StrictMode>
-    </Provider>,
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
