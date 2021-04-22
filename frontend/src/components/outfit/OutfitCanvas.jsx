@@ -55,7 +55,6 @@ export const OutfitCanvas = ({items, connectDropTarget, onDrop, drop, user, crea
     window.show = returnState;
 
     img.onload = function() {
-      console.log(img);
       let widthScale = 200 / img.width;
       let heightScale = 200 / img.height;
       let scale = widthScale < heightScale ? widthScale : heightScale

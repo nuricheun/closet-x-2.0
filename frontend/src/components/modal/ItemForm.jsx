@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import './modal.css'
 
 const ItemForm = ({formType, item, fetchItem, match, history, show, action}) => {
   

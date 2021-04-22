@@ -13,8 +13,8 @@ function App() {
         <Route
         path="/(dashboard|closet|outfits|upload|itemindex)"
         component={UserView} />
-        <Route exact path="/" component={Main} />
         <AuthRoute path="/items" component={OutfitScrollbar}/>
+        <Route exact path="/" component={Main} />
         <Redirect from="/" to="/" />
       </Switch>
     </div>

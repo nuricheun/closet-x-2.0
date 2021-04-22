@@ -1,7 +1,7 @@
 import LoginModalContainer from "../modal/LoginModalContainer";
 import SignupModalContainer from "../modal/SignupModalContainer";
-import './mainpage.css'
-import './main.css'
+import './mainpage.css';
+import './main.css';
 
 export const Main = ({toggleSignupModal, toggleSigninModal}) => {
   

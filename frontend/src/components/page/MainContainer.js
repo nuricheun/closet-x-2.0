@@ -3,7 +3,6 @@ import { toggleSignupModal, toggleSigninModal } from "../../action/modalAction";
 import {Main} from "./Main";
 
 const mapStateToProps = ({entities:{modal: {signupModal}}}) => {
-  console.log(signupModal, "hi")
   return {
     show: signupModal
   };

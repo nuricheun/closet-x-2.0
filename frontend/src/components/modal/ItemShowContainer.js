@@ -1,13 +1,11 @@
 import { connect } from "react-redux";
 import { fetchItem } from "../../action/itemAction";
-import {ItemShow} from "./ItemShow";
+import { ItemShow } from "./ItemShow";
 
-const mapStateToProps = (state, ownProps) => {
-  if (!ownProps.itemId) {
-    return {};
-  }
+const mapStateToProps = ({entities:{modal:{itemFormModal}, items}}, ownProps) => {
   return {
-    item: state.entities.items[ownProps.itemId]
+    show: itemFormModal,
+    item: items[ownProps.itemId]
   };
 };
 

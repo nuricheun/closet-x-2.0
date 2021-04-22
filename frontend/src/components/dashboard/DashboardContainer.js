@@ -4,7 +4,6 @@ import { logout } from "../../action/sessionAction";
 // import fetchOutfits
 
 const mapStateToProps = state => {
-  console.log(state.entities)
   return {};
 };
 

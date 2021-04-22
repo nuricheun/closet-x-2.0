@@ -16,17 +16,29 @@
   height: 70%;
 }
 
-.nav-bar-item-container a, .nav-bar-item-container div {
+.nav-bar-item-container a,
+.nav-bar-item-container div {
   text-decoration: none;
 }
 
-.nav-bar-item-container a:visited, .nav-bar-item-container div {
+.nav-bar-item-container a:visited,
+.nav-bar-item-container div {
   color: black;
   text-decoration: none;
-  
 }
 
-.nav-bar-item-container a:hover, .nav-bar-item-container div:hover {
+.nav-bar-item-container a:hover,
+.nav-bar-item-container div:hover {
   color: gray;
   cursor: pointer;
+}
+
+.menu-option {
+  display: flex;
+}
+
+.sub-menu {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 10px;
 }

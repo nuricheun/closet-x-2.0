@@ -1,20 +1,22 @@
 import {useState, useEffect} from "react";
 import {ItemIndexEach} from "./ItemIndexEach";
-import ItemFormContainer from "./NewItemContainer";
-import ItemShowContainer from "./ItemShowContainer";
+import ItemFormContainer from '../modal/NewItemContainer';
+import ItemShowContainer from '../modal/ItemShowContainer';
 
-export const ItemIndex = ({fetchAllItems, items, userId, itemModal, newModal, toggleItemModal, toggleNewModal}) => {
+import './itemindex.css';
+
+export const ItemIndex = ({fetchAllItems, items, userId, itemModal, newModal, toggleItemFormModal, toggleNewFormModal}) => {
 
   const [itemId, setItemId] = useState(null)
 
   const showNewItemModal = () => {
-    toggleNewModal(true)
+    toggleNewFormModal()
     document.addEventListener("click", hideNewItemModal, false);
   }
 
   const itemShowModal = (id) => {
     setItemId(id)
-    toggleItemModal()
+    toggleItemFormModal()
     document.addEventListener("click", hideItemShowModal, false);
   }
 
@@ -23,7 +25,7 @@ export const ItemIndex = ({fetchAllItems, items, userId, itemModal, newModal, to
     if (spot && spot.contains(e.target)) {
       return;
     }
-    toggleNewModal()
+    toggleNewFormModal()
     document.removeEventListener("click", hideNewItemModal);
   }
 
@@ -32,7 +34,7 @@ export const ItemIndex = ({fetchAllItems, items, userId, itemModal, newModal, to
     if (spot && spot.contains(e.target)) {
       return;
     }
-    toggleItemModal()
+    toggleItemFormModal()
     document.removeEventListener("click", hideItemShowModal);
   }
 
@@ -47,22 +49,12 @@ export const ItemIndex = ({fetchAllItems, items, userId, itemModal, newModal, to
       <ItemIndexEach key={item._id} itemShowModal={itemShowModal} item={item} />
     ));
 
-    let modal = itemShowModal ? (
-      <ItemShowContainer
-        show={itemShowModal}
-        hideItemShowModal={hideItemShowModal}
-        itemId={itemId}
-      />
-    ) : (
-      <></>
-    );
+    
     return (
       <div className="item-index-container">
-        {modal}
-        <ItemFormContainer
-          show={newModal}
-          hideNewItemModal={hideNewItemModal}
-        />
+
+        <ItemShowContainer itemId={itemId}/>
+        <ItemFormContainer/>
         <div className="item-index-items-container">
           {mapped}
         </div>

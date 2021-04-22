@@ -2,10 +2,11 @@ import { connect } from "react-redux";
 import { createItem } from "../../action/itemAction";
 import ItemForm from "./ItemForm";
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({entities:{modal:{newItemFormModal}}, session:{user:{id}}}, ownProps) => {
   return {
+    show: newItemFormModal,
     item: {
-      user: state.session.user.id,
+      user: id,
       title: "",
       category: "",
       color: "",

@@ -2,6 +2,7 @@ from flask import Flask
 from flask_pymongo import PyMongo
 from .extensions import mongodb, connection_url, bcrypt, jwtmanager
 from datetime import timedelta
+from flask_cors import CORS
 
 
 def register_bp(app):
@@ -18,7 +19,7 @@ def register_bp(app):
 
 def create_app(config):
     app = Flask(__name__)
-
+    CORS(app)
     app.config.from_object(config)
     app.config["MONGO_URI"] = connection_url
     app.config["JWT_SECRET_KEY"] = "heyheyhey"

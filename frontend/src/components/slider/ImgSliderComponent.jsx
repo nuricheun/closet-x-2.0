@@ -6,14 +6,15 @@ import "./ImgSlider.css"
 const SliderComponent = ({items}) => {
   
   const [translateDelta, setTranslateDelta] = useState(0)
-  const [delta, setDelta] = useState(300)
+  // const [delta, setDelta] = useState(300)
+  const delta = 300
   const [itemsLeft, setItemsLeft] = useState(0)
 
   useEffect(() => {
     if(items) {
-      setItemsLeft(items.length )
+      setItemsLeft(items.length-3)
     }
-  }, [itemsLeft])
+  }, [])
 
 
   const handleButton = (arg) => {
@@ -25,7 +26,7 @@ const SliderComponent = ({items}) => {
     if (arg === "prev" && translateDelta + delta <= 0) {
       setTranslateDelta(translateDelta+delta)
       setItemsLeft(itemsLeft+3)
-    } else if (arg === "next" && itemsLeft >= 0) {
+    } else if (arg === "next" && itemsLeft > 0) {
       setTranslateDelta(translateDelta-delta)
       setItemsLeft(itemsLeft-3)
     }

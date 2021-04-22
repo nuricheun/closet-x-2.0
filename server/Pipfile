@@ -12,6 +12,7 @@ flask-pymongo = "*"
 pymongo = "*"
 flask-jwt-extended = "*"
 bcrypt-flask = "*"
+flask-cors = "*"
 
 [dev-packages]
 

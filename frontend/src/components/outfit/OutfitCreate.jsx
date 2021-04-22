@@ -10,8 +10,6 @@ const OutfitCreate = () => {
       items:[ ]
     })
 
-
-
   const onDrop = (item) => {
     let img = new Image();
     let canvas = document.querySelector("canvas");

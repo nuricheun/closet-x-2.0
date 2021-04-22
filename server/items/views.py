@@ -11,6 +11,7 @@ items = mongodb.db.items
 
 @items_bp.route('/items', methods=['GET'])
 def get_items():
+    print("hiee??")
     output = items.find()
     return dumps(output)
 

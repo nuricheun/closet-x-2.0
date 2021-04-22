@@ -1,4 +1,5 @@
 import {useEffect} from "react";
+import './modal.css';
 
 export const ItemShow = ({fetchItem, itemId, show, item}) => {
 
