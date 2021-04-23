@@ -3,12 +3,14 @@ import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import OutfitCanvasContainer from "./OutfitCanvasContainer";
 import OutfitScrollBarContainer from "./OutfitScrollbarContainer";
+import './outfit.css'
+
 
 const OutfitCreate = () => {
   
-    const [state, setState] = useState({
-      items:[ ]
-    })
+  const [state, setState] = useState({
+    items:[ ]
+  })
 
   const onDrop = (item) => {
     let img = new Image();
@@ -21,7 +23,7 @@ const OutfitCreate = () => {
     let newItem = {id: item.id, image: img, x, y};
     
     setState({
-      items: [state.items, newItem]
+      items: [...state.items, newItem]
     });
     
   }

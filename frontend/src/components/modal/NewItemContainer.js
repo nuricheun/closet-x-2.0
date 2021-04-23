@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { createItem } from "../../action/itemAction";
+import {toggleNewFormModal} from '../../action/modalAction'
 import ItemForm from "./ItemForm";
 
 const mapStateToProps = ({entities:{modal:{newItemFormModal}}, session:{user:{id}}}, ownProps) => {
@@ -20,7 +21,8 @@ const mapStateToProps = ({entities:{modal:{newItemFormModal}}, session:{user:{id
 
 const mapDispatchToProps = dispatch => {
   return {
-    action: item => dispatch(createItem(item))
+    action: item => dispatch(createItem(item)),
+    toggleNewFormModal: () => dispatch(toggleNewFormModal())
   };
 };
 

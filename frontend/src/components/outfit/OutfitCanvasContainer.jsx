@@ -3,9 +3,11 @@ import OutfitCanvas from "./OutfitCanvas";
 import { createOutfit } from "../../action/outfitAction"
 import { withRouter } from "react-router";
 
-const mapStateToProps = ({session:{user:{id}}}) => {
+const mapStateToProps = ({session:{user:{id}}}, {onDrop, handleClear }) => {
   return {
-    user: id
+    user: id,
+    onDrop,
+    handleClear
   };
 };
 

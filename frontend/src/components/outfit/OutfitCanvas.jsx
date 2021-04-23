@@ -1,5 +1,6 @@
 import {useState, useEffect, useRef} from "react";
 import { DropTarget } from "react-dnd";
+import './outfit.css'
 
 export const OutfitCanvas = ({items, connectDropTarget, onDrop, drop, user, createOutfit, handleClear, history}) => {
   
@@ -15,24 +16,26 @@ export const OutfitCanvas = ({items, connectDropTarget, onDrop, drop, user, crea
 
     useEffect(() => {
         if(didMountRef.current){
-            setState({imageURLs : [],itemIDs: []});
-        for(let i = 0; i < items.length; i++) {
-          setState({imageURLs : [...state.imageURLs, items[i].image.src],
-            itemIDs: [...state.itemIDs, items[i].id]})
-        }
+          setState({...state, imageURLs : [],itemIDs: []});
 
-      let canvas = document.getElementById("canvas");
-      let ctx = canvas.getContext("2d");
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for(let i = 0; i < items.length; i++) {
+            setState({imageURLs : [...state.imageURLs, items[i].image.src],
+              itemIDs: [...state.itemIDs, items[i].id]})
+          }
 
-      renderAll(ctx);
+          let canvas = document.getElementById("canvas");
+          let ctx = canvas.getContext("2d");
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          renderAll(ctx);
+          
         }else{
             let canvas = document.getElementById("canvas");
             canvas.height = 600;
             canvas.width = 600; 
             didMountRef.current=true;
         }
-    }, [items])
+    }, [])
 
   
   
@@ -167,7 +170,7 @@ export const OutfitCanvas = ({items, connectDropTarget, onDrop, drop, user, crea
 }
     return connectDropTarget(
       <div className="canvas-container">
-        <div className="canvas-header">Plan an outfit</div>
+        <div className="canvas-header">Create Outfit</div>
         <canvas
           id="canvas"
           onMouseDown={onMouseDown}

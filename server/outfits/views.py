@@ -9,20 +9,20 @@ outfits_bp = Blueprint('outfits', __name__, url_prefix='/api')
 outfits = mongodb.db.outfits
 
 
-@outfits_bp.route('/<id>', methods=['GET'])
+@outfits_bp.route('/outfits', methods=['GET'])
+def get_outfits():
+    res = outfits.find().sort([('timestamp', -1)]).limit(3)
+    return dumps(res)
+
+
+@outfits_bp.route('/outfit', methods=['GET'])
 def get_outfit():
     outfit_param = request.args.get('outfitId', default=0, type=int)
     res = outfits.find_one_or_404({"_id": ObjectId(item_id)})
     return dumps(res)
 
 
-@outfits_bp.route('/', methods=['GET'])
-def get_outfits():
-    res = outfits.find().sort([('timestamp', -1)]).limit(3)
-    return dumps(res)
-
-
-@outfits_bp.route('/', methods=['GET'])
+@outfits_bp.route('/outfits', methods=['POST'])
 @jwt_required()
 def add_outfit():
     img_url = None

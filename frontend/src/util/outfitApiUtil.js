@@ -5,7 +5,7 @@ export const fetchAllOutfits = () => {
 };
 
 export const fetchOutfit = id => {
-  return axios.get(`/api/outfits/${id}`);
+  return axios.get(`/api/outfit/${id}`);
 };
 
 export const createOutfit = data => {

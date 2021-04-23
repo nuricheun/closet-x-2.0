@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import './modal.css'
 
-const ItemForm = ({formType, item, fetchItem, match, history, show, action}) => {
+const ItemForm = ({formType, item, fetchItem, match, history, show, action, toggleNewFormModal}) => {
   
 const [state, setState] = useState({
     user: '',
@@ -66,6 +66,7 @@ useEffect(()=>{
 
     return (
       <div className={showHideClassName}>
+        <div className="close-icon" onClick={toggleNewFormModal}>CLOSE</div>
         <div className="modal-subcontainer">
           <div className="new-form-container">
             <form onSubmit={handleSubmit}>
