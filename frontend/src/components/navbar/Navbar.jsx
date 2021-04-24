@@ -20,9 +20,7 @@ export const NavBar = ({match, logout, toggleNewFormModal}) => {
             { match.params[0] === "closet" ||  match.params[0] === "outfits" ? <div className="sub-menu" onClick={toggleNewFormModal}> &nbsp; - &nbsp; Add Item</div> : null}
             { match.params[0] === "closet" ||  match.params[0] === "outfits" ? <div className="sub-menu" ><Link to="/outfits/new"> &nbsp; - &nbsp; Add Outfit</Link></div> : null}
         </div>
-        <div className="sign-out-container">
-          <div onClick={logout}>Sign Out</div>
-        </div>
+
       </div>
     )
   

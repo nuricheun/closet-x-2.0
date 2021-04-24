@@ -2,7 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import NavBarContainer from "../navbar/NavbarContainer";
 import Banner from "../banner/BannerContainer";
 import DashboardContainer from "../dashboard/DashboardContainer";
-import OutfitCreate from "../outfit/OutfitCreate";
+import { OutfitCreate } from "../outfit/OutfitCreate";
 import ItemIndexContainer from "../item/ItemIndexContainer";
 import './userview.css'
 

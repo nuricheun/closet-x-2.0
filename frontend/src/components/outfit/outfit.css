@@ -70,10 +70,11 @@ canvas {
   align-items: flex-end;
 }
 
-/* .outfit-button-container button {
+.outfit-button-container button {
   display: flex;
-  align-self: flex-end;
-} */
+  align-items: center;
+  justify-content: center;
+}
 
 .outfit-item-slider {
   height: 100%;
