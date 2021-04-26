@@ -1,11 +1,11 @@
 import {useState, useEffect, useRef} from "react";
-import ItemSliderShow from "./ItemSlideShow";
+import {ItemSliderShow} from "./ItemSlideShow";
+
 import './outfit.css';
 
 
 export const OutfitScrollbar = ({fetchAllItems, userId, items}) => {
   
- 
   const [state, setState] = useState({
     translateDelta: 0,
     delta: 300,
@@ -15,13 +15,14 @@ export const OutfitScrollbar = ({fetchAllItems, userId, items}) => {
   const loading = useRef(true)
 
   useEffect(() => {
-    if(loading.current && items.length > 0){
+    if(loading.current){
       fetchAllItems(userId)
       .then(()=> setState({...state, itemsLeft: items.length-3}))
       .then(() => loading.current = false)
     }
   }, [])
-  
+
+
 
   const handleButton = (arg) => {
     const { translateDelta, delta, itemsLeft } = state;
@@ -69,4 +70,4 @@ export const OutfitScrollbar = ({fetchAllItems, userId, items}) => {
   
 }
 
-export default OutfitScrollbar;
+

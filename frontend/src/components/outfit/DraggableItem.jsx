@@ -8,12 +8,13 @@ export const DraggableItem = ({item}) => {
 
     const handleDrag = (e, d) => {
         const {x, y} = deltaXYPos;
+        console.log("handle drag")
         setDeltaXYPos({ x: x+d.deltaX, y: y+d.deltaY })
     }
 
     return(
         <Draggable onDrag={handleDrag}>
-                <img className="drag-wrapper" src={item.src}/>          
+            <img className="drag-wrapper" src={item.src}/>          
         </Draggable>
     )
 }
