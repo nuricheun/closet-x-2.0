@@ -4,8 +4,6 @@ import {DraggableItem} from './DraggableItem'
 const ImageList = ({ images }) => {
 
   useEffect(() => {
-    console.log(images)
-    
   }, [images])
 
   const renderImage = (image) => {
@@ -16,7 +14,7 @@ const ImageList = ({ images }) => {
     );
   };
 
-  return <section className="file-list">{images.map(renderImage)}</section>;
+  return <section className="file-list">{images.length > 0 && images.map(renderImage)}</section>;
 };
 
 export default ImageList;

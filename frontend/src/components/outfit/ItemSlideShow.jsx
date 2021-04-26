@@ -1,23 +1,33 @@
-import {useDrop, useDrag} from 'react-dnd';
-
+import {useEffect} from 'react'
+import {useDrag} from 'react-dnd';
+import { getEmptyImage } from 'react-dnd-html5-backend';
 
 
 export const ItemSliderShow = ({item, translateDelta}) => {
   
-  const { imageURL, title } = item;
+  const { _id,imageURL } = item;
   
-  const [,drag] = useDrag(() => ({
+  const [{isDragging}, drag, preview] = useDrag(() => {
+    return {
     type: "Image",
-    end: () => console.log("hh")
-  }))
+    item: { _id, imageURL},
+    collect: (monitor) => ({
+            isDragging: monitor.isDragging(),
+    }),
+    end: (item) => console.log(item)
+  }
+}, [_id, imageURL])
+
+    useEffect(() => {
+        preview(getEmptyImage(), { captureDraggingState: true });
+    }, []);
 
     return(
       <div
         className="outfit-item-vert"
         style={{ transform: `translateY(${translateDelta}%)` }}
-        
       >
-        <div>Title: hi{title}</div>
+        <div>Title</div>
         <div className="outfit-item-img-div" ref={drag}>
           <img crossOrigin="Anonymous" className="item-img" src={`${imageURL}?liuahvanb`} alt="" />
         </div>
