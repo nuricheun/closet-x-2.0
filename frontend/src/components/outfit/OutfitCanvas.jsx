@@ -1,12 +1,11 @@
 import {useState, useCallback} from 'react';
-import ImageList from './DraggableItemList';
 import update from 'immutability-helper';
 import {useDrop} from 'react-dnd';
-
+import {DraggableBox} from './DraggableItem';
 import './outfit.css';
 
-export const OutfitCanvas = ({user, createOutfit, history}) => {
 
+export const OutfitCanvas = ({user, createOutfit, history}) => {
 
     const [state, setState] = useState({
         isDragging: false,
@@ -15,17 +14,15 @@ export const OutfitCanvas = ({user, createOutfit, history}) => {
         title: ""
     })
 
-
     const [droppedItems, setDroppedItems] = useState({})
 
-    const moveBox = useCallback((_id, left, top, imageURL) => {
-
-        setDroppedItems({
-            ...droppedItems, 
-                [_id]: {_id, left, top, imageURL}
-        })
-
-    }, [droppedItems]);
+     const moveBox = useCallback((_id, left, top) => {
+        setDroppedItems(
+        update(droppedItems, {
+            [_id]: {
+                $merge: { left, top }}
+            }));
+        },[droppedItems]);
 
     const handleSave = (e) => {
         e.preventDefault();
@@ -42,48 +39,43 @@ export const OutfitCanvas = ({user, createOutfit, history}) => {
 
     const handleClear = (e) => {
         e.preventDefault();
-        setDroppedItems([])
+        setDroppedItems({})
     }
 
-    const sample = [{
-        id: 'a',
-        left: '13',
-        right: '15',
-        src:"http://res.cloudinary.com/closet-x/image/upload/v1618860220/kxfe1tywwjoouagyimt6.png"
-    }]
-
-    const [, drop] = useDrop({
+    const [, drop] = useDrop(()=>(
+        {
         accept: "Image",
         drop: (item, monitor) => {
             const delta = monitor.getDifferenceFromInitialOffset();
             const initialPos = monitor.getInitialClientOffset();
-            let left = Math.round(initialPos.x + delta.x);
-            let top = Math.round(initialPos.y + delta.y);
+        
+            let left = Math.round((item.left || initialPos.x) + delta.x);
+            let top = Math.round((item.top || initialPos.y) + delta.y);
 
             if(droppedItems[item._id] === undefined){
-                setDroppedItems({...droppedItems, [item._id]: {_id: item._id, left, top, imageURL: item.imageURL}})
+                let merged = update(droppedItems, {$merge: {[item._id]: item}})
+                setDroppedItems(update(
+                    merged, {
+                        [item._id]: {
+                            $merge: {left, top}
+                        }
+                    }
+                ))
             }else{
-                moveBox(item._id, left, top, item.imageURL);
+                moveBox(item._id, left, top);
             }
-          
             return undefined;
         }
-    })
+    }), [moveBox])
 
-    const mapped = Object.values(droppedItems).map(item => {
+    const mapped = Object.keys(droppedItems).length > 0 ? Object.keys(droppedItems).map((key) => {
         return (
-            <div>
-                <img style={{width: "100px", height: "100px" }} src={String(item.imageURL)} alt="hey"/>
-            </div>
-        )
-    })
+            <DraggableBox key={key} {...droppedItems[key]} />
+        )}) :  <></>
 
     return(
-        <div className="canvas-container" ref={drop}>
-            {/* <ImageList images={droppedItems} /> */}
-            <div
-                style={{width: "1000px", height: "1000px" }}
-            >
+        <div className="canvas-container">
+            <div ref={drop} className="canvas">
                 {mapped}
             </div>
             <div className="outfit-button-container">

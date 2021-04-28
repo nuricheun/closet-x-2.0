@@ -1,12 +1,13 @@
-import LoginModalContainer from "../modal/LoginModalContainer";
-import SignupModalContainer from "../modal/SignupModalContainer";
+import Modal from '../page/ModalPageContainer';
+import { ModalTypes } from '../modal/modalType';
 import './mainpage.css';
 import './main.css';
 
-export const Main = ({toggleSignupModal, toggleSigninModal}) => {
+export const Main = ({toggleSignupModal, toggleSigninModal, showModal}) => {
   
     return (
       <div className="main-page-container">
+        <Modal />
         <div id="page-wrapper">
           {/* <!-- Header --> */}
           <section id="header">
@@ -25,12 +26,12 @@ export const Main = ({toggleSignupModal, toggleSigninModal}) => {
                 <ul>
                   <li>
                     <div className="icon solid fa-user">
-                      <span onClick={toggleSigninModal}>Login</span>
+                      <span onClick={()=>showModal(ModalTypes.LOG_IN_MODAL)}>Login</span>
                     </div>
                   </li>
                   <li >
                     <div className="icon solid fa-sitemap">
-                      <span onClick={toggleSignupModal}>Signup</span>
+                      <span onClick={()=>showModal(ModalTypes.SIGN_UP_MODAL)}>Signup</span>
                     </div>
                   </li>
                 </ul>
@@ -294,8 +295,6 @@ export const Main = ({toggleSignupModal, toggleSigninModal}) => {
             </div>
           </section>
         </div>
-        <LoginModalContainer/>
-        <SignupModalContainer/>
       </div>
     );
   

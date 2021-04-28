@@ -1,11 +1,13 @@
-import {TOGGLE_ITEM_FORM_MODAL ,TOGGLE_NEW_ITEM_FORM_MODAL, TOGGLE_SIGNUP_MODAL, TOGGLE_SIGNIN_MODAL} from '../action/modalAction';
+import {HIDE_MODAL, SHOW_MODAL, TOGGLE_ITEM_FORM_MODAL ,TOGGLE_NEW_ITEM_FORM_MODAL, TOGGLE_SIGNUP_MODAL, TOGGLE_SIGNIN_MODAL} from '../action/modalAction';
 import merge from 'lodash/merge'
 
 const initialState = {
     itemFormModal : false,
     newItemFormModal : false,
     signinModal: false,
-    signupModal: false
+    signupModal: false,
+    currentModal: null,
+    show: false
 }
 
 export const modalReducer = (state=initialState, action) => {
@@ -24,7 +26,11 @@ export const modalReducer = (state=initialState, action) => {
         case TOGGLE_SIGNUP_MODAL:
             newState = merge({}, state, {["signupModal"]: !state["signupModal"]})
             return newState
+        case SHOW_MODAL:
+            return {currentModal: action.modal, show: true}
+        case HIDE_MODAL:
+            return {currentModal: null, show: false}
         default:
-            return state
+            return {currentModal: null, show: false}
     }
 }

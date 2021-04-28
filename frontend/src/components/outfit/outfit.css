@@ -16,17 +16,17 @@
   align-items: center;
   overflow: auto;
   border-right: 5px solid black;
+  position: relative;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
 }
 
 .canvas-container div input {
   padding: 15px 0;
   padding-left: 5px;
-}
-
-canvas {
-  border: 3px solid black;
-  margin-top: 25px;
-  margin-bottom: 50px;
 }
 
 .outfit-items-scrollbar {
@@ -36,11 +36,6 @@ canvas {
   align-items: center;
   width: 30%;
   min-width: 200px;
-}
-
-.outfit-create-options {
-  height: 50px;
-  width: 100%;
 }
 
 .test-div {
@@ -57,6 +52,11 @@ canvas {
   padding-bottom: 50px;
 }
 
+.outfit-create-options {
+  height: 50px;
+  width: 100%;
+}
+
 .outfit-create-options input {
   width: 50%;
   height: 20px;
@@ -64,7 +64,7 @@ canvas {
 
 .outfit-button-container {
   width: 30%;
-  /* height: 10%; */
+  height: 10%;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;

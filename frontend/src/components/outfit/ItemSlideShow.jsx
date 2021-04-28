@@ -18,17 +18,13 @@ export const ItemSliderShow = ({item, translateDelta}) => {
   }
 }, [_id, imageURL])
 
-    useEffect(() => {
-        preview(getEmptyImage(), { captureDraggingState: true });
-    }, []);
-
     return(
       <div
         className="outfit-item-vert"
         style={{ transform: `translateY(${translateDelta}%)` }}
       >
         <div>Title</div>
-        <div className="outfit-item-img-div" ref={drag}>
+        <div className="outfit-item-img-div" ref={drag} >
           <img crossOrigin="Anonymous" className="item-img" src={`${imageURL}?liuahvanb`} alt="" />
         </div>
       </div>

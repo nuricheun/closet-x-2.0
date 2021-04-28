@@ -52,8 +52,8 @@ const LoginModal = ({toggleSigninModal, errors, login, show}) => {
     : "login-modal-background display-none";
 
     return (
-      <div className={showHideClassName}>
-        <div className="modal-subcontainer" onClick={toggleSigninModal}>
+      // <div className={showHideClassName}>
+        // {/* <div className="modal-subcontainer" onClick={toggleSigninModal}> */}
           <div className="form-container">
             <div className="login-form-header">Login</div>
             <br />
@@ -77,12 +77,10 @@ const LoginModal = ({toggleSigninModal, errors, login, show}) => {
                 <button onClick={handleSubmit}>Log In</button>
                 <button onClick={handleDemoLogin}>Demo Login</button>
               </div>
-
-              {/* {renderErrors()} */}
             </form>
           </div>
-        </div>
-      </div>
+        // </div>
+      // </div>
     );
   
 }

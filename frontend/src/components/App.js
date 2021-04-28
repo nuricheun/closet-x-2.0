@@ -18,7 +18,7 @@ function App() {
           component={UserView} />
           <AuthRoute path="/items" component={OutfitScrollbar}/>
           <Route exact path="/" component={Main} />
-          <Redirect from="/" to="/" />
+          {/* <Redirect from="/" to="/" /> */}
         </DndProvider>
       </Switch>
     </div>

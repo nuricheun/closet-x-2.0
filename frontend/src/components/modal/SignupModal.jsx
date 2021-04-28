@@ -1,26 +1,17 @@
 //MODAL DESIGN INSPIRED BY: https://codepen.io/alligatorio/pen/aYzMKL
 
-import {useState, useEffect} from "react";
+import {useState, useRef, useEffect} from "react";
 import './modal.css';
 import './signupmodal.css';
 
-const SignupModal = ({signup, show, toggleSignupModal}) => {
+const SignupModal = ({signup, hideModal}) => {
 
-    
     const [userinfo, setUserInfo] = useState({
         username: "",
         email: "",
         password: "",
         password2: ""
     })
-  
-
-  // useEffect(() => {
-  //   if (currentUser === true) {
-  //     toggleSignupModal();
-  //     history.push("/dashboard");
-  //   }
-  // }, [currentUser])
 
   const handleInput = (type) => {
     return e => setUserInfo({ [type]: e.target.value });
@@ -31,24 +22,36 @@ const SignupModal = ({signup, show, toggleSignupModal}) => {
     signup(userinfo);
   }
 
-  // const renderErrors = () => {
-  //   return (
-  //     <ul>
-  //       {Object.keys(errors).map((error, i) => (
-  //         <li key={`error-${i}`}>{errors[error]}</li>
-  //       ))}
-  //     </ul>
-  //   );
-  // }
+  const node = useRef();
 
-    const showHideClassName = show
-      ? "signup-modal-background display-block"
-      : "signup-modal-background display-none";
+  useEffect(()=>{
+    
+    
+  document.addEventListener('mousedown', handleClick)
+  console.log(node)
+        
+        
+  return () => {
+      document.removeEventListener('mousedown', handleClick)
+  }
+    
+}, [node])
+
+
+    
+   const handleClick = (e) => {
+       console.log("hey there!", node)
+        if(node.current.contains(e.target)){
+            return ;
+        }
+        hideModal();
+    }
+
 
     return (
-      <div className={showHideClassName} onClick={toggleSignupModal}>
-        <div className="modal-subcontainer">
-          <div className="form-container">
+      
+        
+          <div className="form-container" ref={node}>
             <div className="signup-form-header">Sign Up</div>
             <br />
             <form onSubmit={handleSubmit}>
@@ -85,11 +88,9 @@ const SignupModal = ({signup, show, toggleSignupModal}) => {
               <div className="auth-buttons">
                 <button onClick={handleSubmit}>Sign Up</button>
               </div>
-              {/* {renderErrors()} */}
             </form>
           </div>
-        </div>
-      </div>
+      
     );
   
 }
