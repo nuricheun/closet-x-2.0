@@ -2,41 +2,23 @@ import {useState, useEffect} from "react";
 import {ItemIndexEach} from "./ItemIndexEach";
 import ItemFormContainer from '../modal/NewItemContainer';
 import ItemShowContainer from '../modal/ItemShowContainer';
+import {ModalTypes} from '../modal/modalType'
 
 import './itemindex.css';
 
-export const ItemIndex = ({fetchAllItems, items, userId, itemModal, newModal, toggleItemFormModal, toggleNewFormModal}) => {
+export const ItemIndex = ({fetchAllItems, items, userId, showModal, hideModal}) => {
 
   const [itemId, setItemId] = useState(null)
 
   const showNewItemModal = () => {
-    toggleNewFormModal()
-    document.addEventListener("click", hideNewItemModal, false);
+    hideModal(ModalTypes.NEW_ITEM_MODAL)         
   }
 
   const itemShowModal = (id) => {
     setItemId(id)
-    toggleItemFormModal()
-    document.addEventListener("click", hideItemShowModal, false);
+    showModal(ModalTypes.SHOW_ITEM_MODAL)
   }
 
-  const hideNewItemModal = (e) => {
-    let spot = document.querySelector(".new-form-container");
-    if (spot && spot.contains(e.target)) {
-      return;
-    }
-    toggleNewFormModal()
-    document.removeEventListener("click", hideNewItemModal);
-  }
-
-  const hideItemShowModal = (e) => {
-    let spot = document.querySelector(".new_form_container");
-    if (spot && spot.contains(e.target)) {
-      return;
-    }
-    toggleItemFormModal()
-    document.removeEventListener("click", hideItemShowModal);
-  }
 
   useEffect(() => {
       fetchAllItems(userId);

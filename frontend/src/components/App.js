@@ -16,8 +16,8 @@ function App() {
           <Route
           path="/(dashboard|closet|outfits|upload|itemindex)"
           component={UserView} />
-          <AuthRoute path="/items" component={OutfitScrollbar}/>
-          <Route exact path="/" component={Main} />
+          <ProtectedRoute path="/items" component={OutfitScrollbar}/>
+          <AuthRoute exact path="/" component={Main} />
           <Redirect from="/" to="/" />
         </DndProvider>
       </Switch>

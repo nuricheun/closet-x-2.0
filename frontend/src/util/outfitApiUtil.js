@@ -1,17 +1,18 @@
-import axios from "axios";
+import { instance } from "./axiosinstance";
 
 export const fetchAllOutfits = () => {
-  return axios.get("/api/outfits");
+  return instance.get("/api/outfits");
 };
 
 export const fetchOutfit = id => {
-  return axios.get(`/api/outfit/${id}`);
+  return instance.get(`/api/outfit/${id}`);
 };
 
 export const createOutfit = data => {
-  return axios.post("/api/outfits", data);
+  console.log('util is here')
+  return instance.post("/api/outfits", data);
 };
 
 export const removeItem = data => {
-  return axios.get(`/api/outfits/${data.id}`);
+  return instance.get(`/api/outfits/${data.id}`);
 };

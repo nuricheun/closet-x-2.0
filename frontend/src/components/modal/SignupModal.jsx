@@ -15,12 +15,13 @@ const SignupModal = ({signup, hideModal}) => {
   })
 
   const handleInput = (type) => {
-    return e => setUserInfo({ [type]: e.target.value });
+    return e => setUserInfo({ ...userinfo, [type]: e.target.value });
   }
 
   const handleSubmit = (e) => {
+    console.log(userinfo)
     e.preventDefault();
-    signup(userinfo);
+    signup(userinfo).then(()=>hideModal());
   }
 
     const node = useModalRef(hideModal)

@@ -3,10 +3,10 @@ from flask import (Blueprint, session, request,
 from ..extensions import mongodb, bcrypt
 from bson.objectid import ObjectId
 from bson.json_util import dumps
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 
 
-users_bp = Blueprint('users', __name__, url_prefix='/api')
+users_bp = Blueprint('users', __name__, url_prefix='/api/users')
 users = mongodb.db.users
 
 
@@ -17,9 +17,10 @@ def get_current_user():
 
 @users_bp.route('/register', methods=['POST'])
 def register():
-    username = request.form["username"]
-    email = request.form["email"]
-    password = request.form["password"]
+    user_info = request.get_json()
+    username = user_info["username"]
+    email = user_info["email"]
+    password = user_info["password"]
 
     email_found = users.find_one({"email": email})
 
@@ -35,7 +36,11 @@ def register():
     }
 
     res = users.insert(newUser)
-    return dumps(res)
+
+    access_token = create_access_token(identity=email)
+    refresh_token = create_refresh_token(identity=email)
+
+    return jsonify({"token": access_token, "refresh_token": refresh_token}), 200
 
 
 @users_bp.route('/login', methods=['POST'])
@@ -52,4 +57,5 @@ def login():
 
     access_token = create_access_token(identity=email)
     refresh_token = create_refresh_token(identity=email)
-    return jsonify(access_token=access_token)
+
+    return jsonify({"token": access_token, "refresh_token": refresh_token}), 200

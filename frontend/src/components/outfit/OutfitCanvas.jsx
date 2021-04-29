@@ -1,18 +1,19 @@
-import {useState, useCallback} from 'react';
+import {createRef, useState, useCallback} from 'react';
 import update from 'immutability-helper';
 import {useDrop} from 'react-dnd';
-import {DraggableBox} from './DraggableItem';
+import { useScreenshot } from 'use-react-screenshot'
+// import {DraggableBox} from './DraggableItem';
+import {DraggableItem} from './DraggableItem2';
 import './outfit.css';
 
 
 export const OutfitCanvas = ({user, createOutfit, history}) => {
 
-    const [state, setState] = useState({
-        isDragging: false,
-        imageURLs : [],
-        itemIDs: [],
-        title: ""
-    })
+    const [title, setTitle] = useState('');
+
+    const ref = createRef(null)
+    const [image, takeScreenshot] = useScreenshot()
+    const getImage = () => takeScreenshot(ref.current)
 
     const [droppedItems, setDroppedItems] = useState({})
 
@@ -24,22 +25,29 @@ export const OutfitCanvas = ({user, createOutfit, history}) => {
             }));
         },[droppedItems]);
 
-    const handleSave = (e) => {
+    const handleSave = async (e) => {
         e.preventDefault();
+        await getImage()
 
+        
         const formData = new FormData();
         formData.append("user", user);
-        formData.append("title", state.title);
-        // formData.append("image", blobData);
-        formData.append("imageURL", state.imageURLs);
-        formData.append("items", state.itemIDs)
+        formData.append("title", title);
+        formData.append("file", image);
+    
         createOutfit(formData)
         .then(res => history.push("/"));
     }
 
     const handleClear = (e) => {
         e.preventDefault();
+
         setDroppedItems({})
+        setTitle('')
+    }
+
+    const handleChange = (e) => {
+        setTitle(e.currentTarget.value)
     }
 
     const [, drop] = useDrop(()=>(
@@ -68,19 +76,34 @@ export const OutfitCanvas = ({user, createOutfit, history}) => {
         }
     }), [moveBox])
 
+    // React-dnd version 
+    // const mapped = Object.keys(droppedItems).length > 0 ? Object.keys(droppedItems).map((key) => {
+    //     return (
+    //         <DraggableBox key={key} {...droppedItems[key]} />
+    //     )}) :  <></>
+
+
+    //Draggable version
     const mapped = Object.keys(droppedItems).length > 0 ? Object.keys(droppedItems).map((key) => {
         return (
-            <DraggableBox key={key} {...droppedItems[key]} />
+            <DraggableItem key={key} {...droppedItems[key]} />
         )}) :  <></>
 
     return(
         <div className="canvas-container">
             <div ref={drop} className="canvas">
-                {mapped}
+                <div ref={ref}>
+                    {mapped}
+                </div>
             </div>
-            <div className="outfit-button-container">
-                <button onClick={handleClear}>Clear</button>
-                <button onClick={handleSave}>Save</button>
+            <div className="outfit-create-options">
+                <input type="text" value={title} 
+                    onChange={handleChange}
+                    placeholder="Outfit Title..."></input>
+                <div className="outfit-button-container">
+                    <button onClick={handleClear}>Clear</button>
+                    <button onClick={handleSave}>Save</button>
+                </div>
             </div>
         </div>
     )

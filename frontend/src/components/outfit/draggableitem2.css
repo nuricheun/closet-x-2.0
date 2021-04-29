@@ -1,0 +1,5 @@
+.drag-wrapper img {
+  width: 100px;
+  cursor: move;
+  background: #e5e5e5;
+}

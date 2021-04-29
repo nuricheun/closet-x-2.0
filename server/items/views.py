@@ -10,13 +10,15 @@ items = mongodb.db.items
 
 
 @items_bp.route('/items', methods=['GET'])
+@jwt_required()
 def get_items():
-    print("hiee??")
+    currnet_user = get_jwt_identity()
     output = items.find()
     return dumps(output)
 
 
 @items_bp.route("/item", methods=["GET"])
+@jwt_required()
 def get_item():
 
     item_id = request.args.get(

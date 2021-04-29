@@ -30,8 +30,10 @@ export const logoutUser = () => ({
 export const signup = user => dispatch =>
   APIUtil.signup(user)
     .then(res => {
-      const { token } = res.data;
-      localStorage.setItem("jwtToken", token);
+      console.log(res, "what is it")
+      const { token, refresh_token } = res.data;
+      localStorage.setItem("access_token", token);
+      localStorage.setItem("refresh_token", refresh_token);
       APIUtil.setAuthToken(token);
       const decoded = jwt_decode(token);
       dispatch(receiveCurrentUser(decoded));
@@ -41,8 +43,9 @@ export const signup = user => dispatch =>
 export const login = user => dispatch =>
   APIUtil.login(user)
     .then(res => {
-      const { token } = res.data;
-      localStorage.setItem("jwtToken", token);
+      const { token, refresh_token } = res.data;
+      localStorage.setItem("access_token", token);
+      localStorage.setItem("refresh_token", refresh_token);
       APIUtil.setAuthToken(token);
       const decoded = jwt_decode(token);
       dispatch(receiveCurrentUser(decoded));
@@ -52,7 +55,7 @@ export const login = user => dispatch =>
     });
 
 export const logout = () => dispatch => {
-  localStorage.removeItem("jwtToken");
+  localStorage.removeItem("access_token");
   APIUtil.setAuthToken(false);
   dispatch(logoutUser());
 };
