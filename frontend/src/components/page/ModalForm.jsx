@@ -1,4 +1,3 @@
-import { useEffect, useRef} from 'react';
 import {ModalTypes} from '../modal/modalType';
 import SignupModal from '../modal/SignupModalContainer';
 import LoginModal from '../modal/LoginModalContainer';
@@ -7,31 +6,6 @@ import ShowItemModal from '../modal/ItemShowContainer';
 
 
 export const ModalForm = (whichModal) => {
-
-//     const node = useRef();
-
-//       useEffect(()=>{
-        
-//         if(whichModal){
-//                 document.addEventListener('mousedown', handleClick)
-//                 console.log(node)
-//             }
-            
-//             return () => {
-//                 document.removeEventListener('mousedown', handleClick)
-//             }
-        
-//     }, [node])
-
-
-    
-//    const handleClick = (e) => {
-//        console.log("hey there!", node)
-//         if(node.current.contains(e.target)){
-//             return ;
-//         }
-//         hideModal();
-//     }
 
     let ModalOption = ""
 

@@ -10,3 +10,10 @@
   align-items: center;
   z-index: 50;
 }
+
+.modal-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+}

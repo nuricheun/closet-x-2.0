@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo} from 'react';
+import { useMemo} from 'react';
 import {ModalContainer} from '../modal/ModalContainer';
 import { ModalForm } from './ModalForm';
 import './modalPage.css';

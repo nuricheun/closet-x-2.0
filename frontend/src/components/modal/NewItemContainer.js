@@ -1,11 +1,10 @@
 import { connect } from "react-redux";
 import { createItem } from "../../action/itemAction";
-import {toggleNewFormModal} from '../../action/modalAction'
+import {hideModal} from '../../action/modalAction'
 import ItemForm from "./ItemForm";
 
-const mapStateToProps = ({entities:{modal:{newItemFormModal}}, session:{user:{id}}}, ownProps) => {
+const mapStateToProps = ({session:{user:{id}}}, ownProps) => {
   return {
-    show: newItemFormModal,
     item: {
       user: id,
       title: "",
@@ -22,7 +21,7 @@ const mapStateToProps = ({entities:{modal:{newItemFormModal}}, session:{user:{id
 const mapDispatchToProps = dispatch => {
   return {
     action: item => dispatch(createItem(item)),
-    toggleNewFormModal: () => dispatch(toggleNewFormModal())
+    hideModal: () => dispatch(hideModal())
   };
 };
 

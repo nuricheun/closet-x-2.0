@@ -2,16 +2,16 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 import {NavBar} from "./Navbar";
 import { logout } from "../../action/sessionAction";
-import {toggleNewFormModal} from '../../action/modalAction'
+import { showModal } from '../../action/modalAction'
 
-const mapStateToProps = state => {
-  return {};
-};
+const mapStateToProps = (state, ownProps) => ({
+  match: ownProps.match
+})
 
 const mapDispatchToProps = dispatch => {
   return {
     logout: () => dispatch(logout()),
-    toggleNewFormModal: () => dispatch(toggleNewFormModal())
+    showModal: (type) => dispatch(showModal(type))
   };
 };
 

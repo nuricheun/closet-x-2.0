@@ -1,21 +1,19 @@
 import { connect } from "react-redux";
 import { fetchAllItems } from "../../action/itemAction";
-import { toggleItemFormModal, toggleNewFormModal } from '../../action/modalAction';
+import { hideModal } from '../../action/modalAction';
 import { ItemIndex } from "./ItemIndex";
 
-const mapStateToProps = ({session:{user:{id}}, entities:{items, modal:{itemModal, newModal}}}, ownProps) => {
+const mapStateToProps = ({session:{user:{id}}, entities:{items, modal:{currentModal}}}, ownProps) => {
   return {
     userId: id,
     items: Object.values(items),
-    itemModal,
-    newModal
+    currentModal
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   fetchAllItems: (id) => dispatch(fetchAllItems(id)),
-  toggleNewFormModal: () => dispatch(toggleNewFormModal()),
-  toggleItemFormModal: () =>  dispatch(toggleItemFormModal())
+  hideModal: () => dispatch(hideModal())
 });
 
 export default connect(

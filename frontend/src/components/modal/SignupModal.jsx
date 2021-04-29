@@ -1,17 +1,18 @@
 //MODAL DESIGN INSPIRED BY: https://codepen.io/alligatorio/pen/aYzMKL
 
-import {useState, useRef, useEffect} from "react";
+import {useState} from "react";
+import {useModalRef} from '../../hooks/useModal';
 import './modal.css';
 import './signupmodal.css';
 
 const SignupModal = ({signup, hideModal}) => {
 
-    const [userinfo, setUserInfo] = useState({
-        username: "",
-        email: "",
-        password: "",
-        password2: ""
-    })
+  const [userinfo, setUserInfo] = useState({
+    username: "",
+    email: "",
+    password: "",
+    password2: ""
+  })
 
   const handleInput = (type) => {
     return e => setUserInfo({ [type]: e.target.value });
@@ -22,31 +23,7 @@ const SignupModal = ({signup, hideModal}) => {
     signup(userinfo);
   }
 
-  const node = useRef();
-
-  useEffect(()=>{
-    
-    
-  document.addEventListener('mousedown', handleClick)
-  console.log(node)
-        
-        
-  return () => {
-      document.removeEventListener('mousedown', handleClick)
-  }
-    
-}, [node])
-
-
-    
-   const handleClick = (e) => {
-       console.log("hey there!", node)
-        if(node.current.contains(e.target)){
-            return ;
-        }
-        hideModal();
-    }
-
+    const node = useModalRef(hideModal)
 
     return (
       
@@ -86,7 +63,7 @@ const SignupModal = ({signup, hideModal}) => {
               </label>
               <br />
               <div className="auth-buttons">
-                <button onClick={handleSubmit}>Sign Up</button>
+                <button className="modal-button" onClick={handleSubmit}>Sign Up</button>
               </div>
             </form>
           </div>

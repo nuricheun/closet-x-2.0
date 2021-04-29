@@ -1,11 +1,14 @@
 //MODAL DESIGN INSPIRED BY: https://codepen.io/alligatorio/pen/aYzMKL
 
-import {useState, useEffect} from "react";
+import {useState} from "react";
+import {useModalRef} from '../../hooks/useModal';
 import './modal.css';
 import './loginmodal.css';
 
-const LoginModal = ({toggleSigninModal, errors, login, show}) => {
+const LoginModal = ({login, hideModal}) => {
   
+  const node = useModalRef(hideModal)
+
   const [state, setState] = useState({
       username: "",
       email: "",
@@ -36,25 +39,10 @@ const LoginModal = ({toggleSigninModal, errors, login, show}) => {
     login(user);
   }
 
-  const renderErrors = () => {
-    return (
-      <ul>
-        {Object.keys(errors).map((error, i) => (
-          <li key={`error-${i}`}>{errors[error]}</li>
-        ))}
-      </ul>
-    );
-  }
-
- 
-  const showHideClassName = show
-    ? "login-modal-background display-block"
-    : "login-modal-background display-none";
 
     return (
-      // <div className={showHideClassName}>
-        // {/* <div className="modal-subcontainer" onClick={toggleSigninModal}> */}
-          <div className="form-container">
+
+          <div className="form-container" ref={node}>
             <div className="login-form-header">Login</div>
             <br />
             <form onSubmit={handleSubmit}>
@@ -74,13 +62,11 @@ const LoginModal = ({toggleSigninModal, errors, login, show}) => {
               </label>
               <br />
               <div className="auth-buttons">
-                <button onClick={handleSubmit}>Log In</button>
-                <button onClick={handleDemoLogin}>Demo Login</button>
+                <button className="modal-button" onClick={handleSubmit}>Log In</button>
+                <button className="modal-button" onClick={handleDemoLogin}>Demo Login</button>
               </div>
             </form>
           </div>
-        // </div>
-      // </div>
     );
   
 }

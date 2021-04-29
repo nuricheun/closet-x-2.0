@@ -3,7 +3,7 @@ import { ModalTypes } from '../modal/modalType';
 import './mainpage.css';
 import './main.css';
 
-export const Main = ({toggleSignupModal, toggleSigninModal, showModal}) => {
+export const Main = ({showModal}) => {
   
     return (
       <div className="main-page-container">
@@ -113,7 +113,7 @@ export const Main = ({toggleSignupModal, toggleSigninModal, showModal}) => {
                   <ul className="actions">
                     <li>
                       <div
-                        onClick={toggleSignupModal}
+                        onClick={()=>showModal(ModalTypes.LOG_IN_MODAL)}
                         href="#"
                         className="button icon solid fa-sitemap"
                       >
@@ -180,8 +180,7 @@ export const Main = ({toggleSignupModal, toggleSigninModal, showModal}) => {
                   <ul className="actions">
                     <li>
                       <div
-                        onClick={toggleSignupModal}
-                        href="#"
+                        onClick={()=>showModal(ModalTypes.LOG_IN_MODAL)}
                         className="button icon solid fa-sitemap"
                       >
                         Signup Today!

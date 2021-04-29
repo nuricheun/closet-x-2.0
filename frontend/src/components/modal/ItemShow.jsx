@@ -1,7 +1,10 @@
 import {useEffect} from "react";
+import {useModalRef} from '../../hooks/useModal';
 import './modal.css';
 
-export const ItemShow = ({fetchItem, itemId, show, item}) => {
+export const ItemShow = ({fetchItem, itemId, item, hideModal}) => {
+
+  const node = useModalRef(hideModal)
 
     useEffect(() => {
         if(itemId){
@@ -9,24 +12,17 @@ export const ItemShow = ({fetchItem, itemId, show, item}) => {
         }
     }, [])
 
-  
-    const showHideClassName = show
-      ? "show-modal-background display-flex"
-      : "show-modal-background display-none";
     if (!item) {
       return null;
     }
+
     return (
-      <>
-        <div className={showHideClassName}>
-          <div className="show-item-container">
-            <div className="show-item-contents">
-              <div>{item.title}</div>
-              <img src={item.imageURL} id="show-image" alt={`item id: ${item._id}`}/>
-            </div>
-          </div>
+      <div className="show-item-container" ref={node}>
+        <div className="show-item-contents">
+          <div>{item.title}</div>
+          <img src={item.imageURL} id="show-image" alt={`item id: ${item._id}`}/>
         </div>
-      </>
+      </div>
     );
 }
 
