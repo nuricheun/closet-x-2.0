@@ -26,29 +26,22 @@ export const receiveItemErrors = errors => ({
 });
 
 export const fetchAllItems = () => dispatch =>
-  ItemAPIUtil.fetchAllItems().then(items =>
-    dispatch(receiveAllItems(items), err =>
-      dispatch(receiveItemErrors(err.responseJSON))
-    )
-  );
+  ItemAPIUtil.fetchAllItems()
+  .then(items => dispatch(receiveAllItems(items)))
+  // .catch(error => dispatch(receiveItemErrors(error.responseJSON)))
+  
 
 export const fetchItem = id => dispatch =>
-  ItemAPIUtil.fetchItem(id).then(item =>
-    dispatch(receiveItem(item), err =>
-      dispatch(receiveItemErrors(err.responseJSON))
-    )
-  );
+  ItemAPIUtil.fetchItem(id)
+  .then(item => dispatch(receiveItem(item)))
+  // .catch(err => dispatch(receiveItemErrors(err.responseJSON)))
 
 export const createItem = item => dispatch =>
-  ItemAPIUtil.createItem(item).then(item =>
-    dispatch(receiveItem(item), err =>
-      dispatch(receiveItemErrors(err.responseJSON))
-    )
-  );
+  ItemAPIUtil.createItem(item)
+  .then(item => dispatch(receiveItem(item)))
+  // .catch(err => dispatch(receiveItemErrors(err.responseJSON)))
 
 export const updateItem = (item, id) => dispatch =>
-  ItemAPIUtil.updateItem(item, id).then(item =>
-    dispatch(receiveItem(item), err =>
-      dispatch(receiveItemErrors(err.responseJSON))
-    )
-  );
+  ItemAPIUtil.updateItem(item, id)
+  .then(item => dispatch(receiveItem(item)))
+  // .catch(err =>dispatch(receiveItemErrors(err.responseJSON)))

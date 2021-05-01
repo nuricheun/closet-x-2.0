@@ -10,6 +10,14 @@ users_bp = Blueprint('users', __name__, url_prefix='/api/users')
 users = mongodb.db.users
 
 
+@users_bp.route('/refresh', methods=['POST'])
+@jwt_required(refresh=True)
+def refresh():
+    identity = get_jwt_identity()
+    access_token = create_access_token(identity=identity, fresh=False)
+    return jsonify({"access_token": access_token})
+
+
 @users_bp.route('/current', methods=['GET'])
 def get_current_user():
     return ''

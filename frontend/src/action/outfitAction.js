@@ -28,22 +28,18 @@ export const receiveOutfitErrors = errors => ({
 });
 
 export const fetchAllOutfits = () => dispatch =>
-  OutfitAPIUtil.fetchAllOutfits().then(outfits =>
-    dispatchEvent(receiveAllOutfits(outfits), err =>
-      dispatch(receiveItemErrors(err.responseJSON))
-    )
-  );
+  OutfitAPIUtil.fetchAllOutfits()
+  .then(outfits => dispatchEvent(receiveAllOutfits(outfits)))
+  // .catch(err => dispatch(receiveItemErrors(err.responseJSON)))
+  
 
 export const fetchOutfit = id => dispatch =>
-  OutfitAPIUtil.fetchOutfit(id).then(outfit =>
-    dispatch(receiveOutfit(outfit), err =>
-      dispatch(receiveOutfitErrors(err.responseJSON))
-    )
-  );
+  OutfitAPIUtil.fetchOutfit(id)
+  .then(outfit => dispatch(receiveOutfit(outfit)))
+  .catch(err => console.log(err))
 
 export const createOutfit = outfit => dispatch =>
-  OutfitAPIUtil.createOutfit(outfit).then(outfit =>
-    dispatch(receiveOutfit(outfit), err =>
-      dispatch(receiveOutfitErrors(err.responseJSON))
-    )
-  );
+  OutfitAPIUtil.createOutfit(outfit)
+    .then(outfit => dispatch(receiveOutfit(outfit)))
+    .catch(err => console.log("createoutfit", err))
+    // .catch(err => dispatch(receiveOutfitErrors(err.responseJSON)));

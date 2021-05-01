@@ -9,7 +9,6 @@ export const fetchOutfit = id => {
 };
 
 export const createOutfit = data => {
-  console.log('util is here')
   return instance.post("/api/outfits", data);
 };
 

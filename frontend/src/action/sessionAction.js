@@ -16,7 +16,6 @@ export const receiveUserSignIn = () => ({
 });
 
 export const receiveErrors = errors => {
-  // debugger;
   return {
     type: RECEIVE_SESSION_ERRORS,
     errors
@@ -30,7 +29,6 @@ export const logoutUser = () => ({
 export const signup = user => dispatch =>
   APIUtil.signup(user)
     .then(res => {
-      console.log(res, "what is it")
       const { token, refresh_token } = res.data;
       localStorage.setItem("access_token", token);
       localStorage.setItem("refresh_token", refresh_token);
@@ -56,6 +54,5 @@ export const login = user => dispatch =>
 
 export const logout = () => dispatch => {
   localStorage.removeItem("access_token");
-  APIUtil.setAuthToken(false);
-  dispatch(logoutUser());
+  APIUtil.setAuthToken(false).then(() => dispatch(logoutUser()));
 };
