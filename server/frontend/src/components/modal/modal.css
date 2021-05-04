@@ -10,7 +10,6 @@
   align-items: center;
 }
 
-
 .modal-subcontainer {
   height: 100%;
   width: 100%;
@@ -72,4 +71,9 @@
   width: 500px;
   border: 2px solid black;
   margin-bottom: 10px;
+}
+
+.error-message {
+  color: red;
+  font-size: 9px;
 }
