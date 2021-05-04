@@ -1,4 +1,4 @@
-from flask import (Blueprint, session, request, url_for, jsonify)
+from flask import (Blueprint, request, jsonify)
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from bson.objectid import ObjectId
 from bson.json_util import dumps

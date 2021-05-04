@@ -1,0 +1,83 @@
+.dashboard {
+  height: 100%;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 10px 5px 10px;
+  overflow-y: auto;
+}
+
+.outfit-img-div {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outfit-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+.outfit-img:hover {
+  cursor: pointer;
+}
+
+.outfit-index {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.outfit-item {
+  height: 500px;
+  flex: 0 0 33.7%;
+  transition: transform 1500ms ease 100ms;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.outfit-index:hover .outfit-item {
+  transform: translateX(-25%);
+}
+
+/* .outfit-item:hover ~ .outfit-item {
+  transform: translateX(25%);
+} */
+
+/* .outfit-item:hover {
+  transform: scale(1.5) !important;
+} */
+
+.nav-bar-item-container {
+  height: 70%;
+}
+
+.sign-out-container {
+  height: 10%;
+}
+
+.sign-out-container div:hover {
+  cursor: pointer;
+}
+
+/* .dashboard-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  align-self: flex-end;
+} */
+
+.user-body {
+  display: flex;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.image-slider {
+  width: 100%;
+}

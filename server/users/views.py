@@ -1,5 +1,4 @@
-from flask import (Blueprint, session, request,
-                   url_for, current_app, abort, jsonify)
+from flask import (Blueprint, request, jsonify)
 from ..extensions import mongodb, bcrypt
 from bson.objectid import ObjectId
 from bson.json_util import dumps
@@ -16,11 +15,6 @@ def refresh():
     identity = get_jwt_identity()
     access_token = create_access_token(identity=identity, fresh=False)
     return jsonify({"access_token": access_token})
-
-
-@users_bp.route('/current', methods=['GET'])
-def get_current_user():
-    return ''
 
 
 @users_bp.route('/register', methods=['POST'])
@@ -40,7 +34,7 @@ def register():
     newUser = {
         "username": username,
         "email": email,
-        "password": pw_hash
+        "password": pw_hash.decode('UTF-8')
     }
 
     res = users.insert(newUser)
@@ -54,13 +48,18 @@ def register():
 @users_bp.route('/login', methods=['POST'])
 def login():
 
-    email = request.form["email"]
-    password = request.form["password"]
+    user_info = request.get_json()
+    email = user_info["email"]
+    password = user_info["password"]
 
     email_found = users.find_one({"email": email})
 
-    if email_found == None or bcrypt.check_password_hash(
-            pw_hash, email_found["password"]) == False:
+    if email_found == None:
+        return "User information or password don't match"
+
+    hashed = email_found["password"]
+
+    if bcrypt.check_password_hash(hashed, password) == password:
         return "User information or password don't match"
 
     access_token = create_access_token(identity=email)

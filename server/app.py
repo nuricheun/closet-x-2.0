@@ -18,8 +18,8 @@ def register_bp(app):
 
 
 def create_app(config):
-    app = Flask(__name__)
-    CORS(app)
+    app = Flask(__name__, static_url_path='', static_folder='frontend/build')
+    CORS(app) #Comment this on deployment
     app.config.from_object(config)
     app.config["MONGO_URI"] = connection_url
     app.config["JWT_SECRET_KEY"] = "heyheyhey"
