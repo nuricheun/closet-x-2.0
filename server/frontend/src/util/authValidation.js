@@ -5,11 +5,13 @@ const isValidEmail = (email) => {
 
 export const authValidation = (data, formType) => {
   const result = {};
-  const { username, email, password, passwordconfirm } = data;
+  const { username, email, password, password2 } = data;
+
+    console.log(password, password2)
 
   if (formType !== "signin") {
     username.length === 0 && (result["username"] = "username is required");
-    password !== passwordconfirm &&
+    password !== password2 &&
       (result["passwordconfirm"] = "password don't mach");
   }
 

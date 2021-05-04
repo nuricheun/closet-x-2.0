@@ -72,9 +72,9 @@ const SignupModal = ({signup, hideModal}) => {
                 <input
                   type="password"
                   onChange={handleInput("password2")}
-                  onClick={handleClick('passwordconfirm')}
+                  onClick={handleClick('password2')}
                 />
-                { error["passwordconfirm"] && <p className="error-message">{error["passwordconfirm"]}</p>}
+                { error["password2"] && <p className="error-message">{error["password2"]}</p>}
               </label>
               <br />
               <div className="button-container">
