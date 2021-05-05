@@ -15,6 +15,7 @@ const LoginModal = ({login, hideModal}) => {
       password: ""
     })
 
+
   const [error, setError] = useState({});
     
   const handleInput = (type) => {
@@ -27,7 +28,7 @@ const LoginModal = ({login, hideModal}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const res = authValidation(state, "signin")
+    const res = authValidation(state, "signin");
     if(res[0] !== true){
       setError({...error, ...res[1]})
       return
@@ -36,15 +37,16 @@ const LoginModal = ({login, hideModal}) => {
   }
 
 
-  const handleDemoLogin = () => {
+  const handleDemoLogin = (e) => {
+    e.preventDefault();
     const mockPassword = "password123";
-    const mockEmail = "guest@email.com"
+    const mockEmail = "guest@email.com";
     let i = 0;
     let j = 0;
 
     asyncInterval(
       () => {
-        setState({...state, email: state['email']+mockEmail[j]});
+        setState(pre=>({email: pre['email']+mockEmail[j], password: pre["password"]}));
         j++;
         return j === mockEmail.length;
       },
@@ -54,7 +56,7 @@ const LoginModal = ({login, hideModal}) => {
       .then(() =>
         asyncInterval(
           () => {
-            setState({...state, password: state['password']+mockPassword[i]});
+            setState(pre=>({email: pre['email'], password: pre["password"]+mockPassword[i]}));
             i++;
             return i === mockPassword.length;
           },
@@ -69,11 +71,11 @@ const LoginModal = ({login, hideModal}) => {
       <div className="form-container" ref={node}>
         <div className="form-header">Login</div>
         <br />
-        <form onSubmit={handleSubmit}>
+        <form>
           <label>
             Email:
             <br />
-            <input type="text" onChange={handleInput("email")} onClick={handleClick('email')}/>
+            <input type="text" onChange={handleInput("email")} onClick={handleClick('email')} value={state['email']}/>
             { error["email"] && <p className="error-message">{error["email"]}</p>}
           </label>
           <br />
@@ -84,13 +86,14 @@ const LoginModal = ({login, hideModal}) => {
               type="password"
               onChange={handleInput("password")}
               onClick={handleClick('password')}
+              value={state['password']}
             />
             { error["password"] && <p className="error-message">{error["password"]}</p>}
           </label>
           <br />
           <div className="button-container">
-            <button className="modal-button" onClick={handleSubmit}>Log In</button>
-            <button className="modal-button" onClick={handleDemoLogin} ref={inputRef}>Demo Login</button>
+            <button className="modal-button" onClick={handleSubmit} ref={inputRef}>Log In</button>
+            <button className="modal-button" onClick={handleDemoLogin}>Demo Login</button>
           </div>
         </form>
       </div>

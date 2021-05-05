@@ -7,8 +7,6 @@ export const authValidation = (data, formType) => {
   const result = {};
   const { username, email, password, password2 } = data;
 
-    console.log(password, password2)
-
   if (formType !== "signin") {
     username.length === 0 && (result["username"] = "username is required");
     password !== password2 &&

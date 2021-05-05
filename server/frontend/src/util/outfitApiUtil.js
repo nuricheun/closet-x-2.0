@@ -1,17 +1,17 @@
 import { instance } from "./axiosinstance";
 
 export const fetchAllOutfits = () => {
-  return instance.get("/api/outfits");
+  return instance.get("/outfits");
 };
 
 export const fetchOutfit = id => {
-  return instance.get(`/api/outfit/${id}`);
+  return instance.get(`/outfit/${id}`);
 };
 
 export const createOutfit = data => {
-  return instance.post("/api/outfits", data);
+  return instance.post("/outfits", data);
 };
 
 export const removeItem = data => {
-  return instance.get(`/api/outfits/${data.id}`);
+  return instance.get(`/outfits/${data.id}`);
 };

@@ -12,7 +12,7 @@ outfits = mongodb.db.outfits
 @outfits_bp.route('/outfits', methods=['GET'])
 @jwt_required()
 def get_outfits():
-    res = outfits.find().sort([('timestamp', -1)]).limit(3)
+    res = outfits.find().sort([('timestamp', -1)])
     return dumps(res)
 
 
