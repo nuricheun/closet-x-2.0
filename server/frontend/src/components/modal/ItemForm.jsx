@@ -32,11 +32,9 @@ useEffect(()=>{
     };
   }
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("user", state.user);
     formData.append("title", state.title);
     if (state.image) {
       formData.append("image", state.image);
@@ -46,8 +44,8 @@ useEffect(()=>{
     }
     formData.append("category", state.category);
     formData.append("color", state.color);
-    action(formData, item._id)
-      .then(res => history.push("/closet"));
+    action(formData, item && item._id)
+      .then(() => hideModal());
   }
 
   const handleImageFile = (e) => {

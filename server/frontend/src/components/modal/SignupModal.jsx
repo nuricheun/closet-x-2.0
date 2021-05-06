@@ -27,7 +27,7 @@ const SignupModal = ({signup, hideModal}) => {
       setError({...error, ...res[1]})
       return;
     }
-    signup(userinfo).then(()=>hideModal());
+    signup(userinfo)
   }
 
 

@@ -1,5 +1,6 @@
 import * as APIUtil from "../util/sessionApiUtil";
 import jwt_decode from "jwt-decode";
+import { hideModal } from './modalAction';
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
@@ -30,8 +31,9 @@ export const signup = user => dispatch =>
       localStorage.setItem("refresh_token", refresh_token);
       APIUtil.setAuthToken(token);
       const decoded = jwt_decode(token);
-      dispatch(receiveCurrentUser(decoded));
+      return dispatch(receiveCurrentUser(decoded));
     })
+    .then(() => dispatch(hideModal()))
     // .catch(err => dispatch(receiveErrors(err.response.data)));
 
 export const login = user => dispatch =>
@@ -42,8 +44,9 @@ export const login = user => dispatch =>
       localStorage.setItem("refresh_token", refresh_token);
       APIUtil.setAuthToken(token);
       const decoded = jwt_decode(token);
-      dispatch(receiveCurrentUser(decoded));
+      return dispatch(receiveCurrentUser(decoded));
     })
+    .then(() => dispatch(hideModal()))
     // .catch(err => {
     //   dispatch(receiveErrors(err.response.data));
     // });

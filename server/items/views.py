@@ -32,24 +32,23 @@ def get_item():
     return dumps(output)
 
 
-@ items_bp.route("/add", methods=["POST"])
+@ items_bp.route("/items/add", methods=["POST"])
 @jwt_required()
 def add_item():
     img_url = None
     currnet_user = get_jwt_identity()
+    title = request.form["title"]
     category = request.form["category"]
     color = request.form["color"]
-    name = request.form["name"]
-    file_to_upload = request.files["file"]
 
-    if file_to_upload:
-        img_url = upload_file(file_to_upload)
+    if request.files and request.files["image"] != None:
+        img_url = upload_file(request.files["image"])
 
     new_item = {
         "user": currnet_user,
-        "name": name,
-        "color": color,
+        "title": title,
         "category": category,
+        "color": color,
         "imageURL": img_url
     }
 

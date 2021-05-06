@@ -4,11 +4,13 @@ import { fetchItem } from "../../action/itemAction";
 import { hideModal } from '../../action/modalAction'
 import ItemForm from "./ItemForm";
 
-const mapStateToProps = ({session:{user:{currentUser}}}, ownProps) => {
+const mapStateToProps = ({session:{user:{currentUser}}}, {match, history}) => {
   return {
     currentUser,
     item: null,
-    formType: "Create Item"
+    formType: "Create Item",
+    match,
+    history
   };
 };
 

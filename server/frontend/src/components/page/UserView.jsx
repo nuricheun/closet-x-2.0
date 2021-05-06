@@ -4,7 +4,7 @@ import Banner from "../banner/BannerContainer";
 import DashboardContainer from "../dashboard/DashboardContainer";
 import { OutfitCreate } from "../outfit/OutfitCreate";
 import ItemIndexContainer from "../item/ItemIndexContainer";
-import './userview.css'
+import './Userview.css'
 
 
 export const UserView = () => {

@@ -30,10 +30,9 @@ def add_outfit():
     img_url = None
     current_user = get_jwt_identity()
     title = request.form['title']
-    file_to_upload = request.form['image']
 
-    if(file_to_upload):
-        img_url = upload_file(file_to_upload)
+    if request.form["file"] != None:
+        img_url = upload_file(request.form["file"])
 
     newOutfit = {
         "user": current_user,

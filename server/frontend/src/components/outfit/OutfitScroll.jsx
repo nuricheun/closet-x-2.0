@@ -1,7 +1,7 @@
 import {useState, useEffect, useRef} from "react";
 import {ItemSliderShow} from "./ItemSlideShow";
 
-import './outfit.css';
+import './Outfit.css';
 
 export const OutfitScrollbar = ({fetchAllItems, userId, items}) => {
   
@@ -39,17 +39,19 @@ export const OutfitScrollbar = ({fetchAllItems, userId, items}) => {
     }
   }
 
+  if(!items) return null
+
   const renderItems = items.map(item => {
+
     return (
         <ItemSliderShow
-          key={item.id}
+          key={item._id.$oid}
           item={item}
           translateDelta={state.translateDelta}
         />
     );
   });
 
-  if(!items) return null
 
   return (
     <div className="outfit-item-slider">  

@@ -1,5 +1,5 @@
 import { withRouter } from "react-router-dom";
-import './outfit.css'
+import './Outfit.css'
 
 const Outfit = ({outfit, translateDelta}) => {
   

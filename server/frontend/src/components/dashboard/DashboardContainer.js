@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
-import {Dashboard} from "./Dashboard";
 import { logout } from "../../action/sessionAction";
 import {fetchAllOutfits} from '../../action/outfitAction';
+import {Dashboard} from "./Dashboard";
 
 const mapStateToProps = ({entities: {outfits}}) => ({
   outfits

@@ -33,7 +33,7 @@ const LoginModal = ({login, hideModal}) => {
       setError({...error, ...res[1]})
       return
     }
-    login(state).then(() => hideModal());
+    login(state)
   }
 
 

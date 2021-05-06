@@ -5,9 +5,7 @@ export const DraggableItem = ({imageURL}) => {
 
 return (
     <Draggable>
-        <div className="drag-wrapper">
-            <img src={imageURL} alt=""/>
-        </div>
+        <img crossOrigin="Anonymous" className="drag-wrapper" src={imageURL} alt=""/>
     </Draggable>
     )
 

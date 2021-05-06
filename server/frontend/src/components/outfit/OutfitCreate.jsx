@@ -1,7 +1,7 @@
 import OutfitCanvasContainer from "./OutfitCanvasContainer";
 import OutfitScrollBarContainer from "./OutfitScrollbarContainer";
 
-import './outfit.css'
+import './Outfit.css'
 
 export const OutfitCreate = () => {
 
