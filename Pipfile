@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 flask-bcrypt = "*"
 gunicorn = "*"
+flask-pymongo = "*"
 
 [dev-packages]
 
