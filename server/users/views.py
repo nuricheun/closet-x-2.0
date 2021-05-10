@@ -8,6 +8,12 @@ from flask_jwt_extended import create_access_token, create_refresh_token, jwt_re
 users_bp = Blueprint('users', __name__, url_prefix='/api/users')
 users = mongodb.db.users
 
+@users_bp.route('/', methods=['GET'])
+def index():
+    return users_bp.send_static_file('index.html')
+    
+
+
 
 @users_bp.route('/refresh', methods=['POST'])
 @jwt_required(refresh=True)

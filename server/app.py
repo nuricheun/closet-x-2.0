@@ -18,8 +18,9 @@ def register_bp(app):
 
 
 def create_app(config):
-    app = Flask(__name__, static_url_path='', static_folder='frontend/build')
-    CORS(app) #Comment this on deployment
+    app = Flask(__name__, static_url_path='/',
+                static_folder='./frontend/build')
+    CORS(app)  # Comment this on deployment
     app.config.from_object(config)
     app.config["MONGO_URI"] = connection_url
     app.config["JWT_SECRET_KEY"] = "heyheyhey"
@@ -32,4 +33,15 @@ def create_app(config):
 
     register_bp(app)
 
+    @app.route('/', methods=["GET"])
+    def index():
+        return app.send_static_file('index.html')
+
+    @app.errorhandler(404)
+    def not_found(e):
+        return app.send_static_file('index.html')
+
     return app
+
+
+
