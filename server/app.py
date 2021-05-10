@@ -17,7 +17,7 @@ def register_bp(app):
     app.register_blueprint(error_handlers)
 
 
-def create_app(config):
+def create_app(config=None):
     app = Flask(__name__, static_url_path="",
                 static_folder='frontend/build')
     CORS(app)  # Comment this on deployment
