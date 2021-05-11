@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_pymongo import PyMongo
 from .extensions import mongodb, connection_url, bcrypt, jwtmanager
 from datetime import timedelta
@@ -34,7 +34,7 @@ def create_app(config=None):
 
     @app.route('/', methods=["GET"])
     def index():
-        return app.send_from_directory(app.static_folder, 'index.html')
+        return send_from_directory(app.static_folder, 'index.html')
 
     @app.route('/favicon.ico', methods=["GET"])
     def favicon():
@@ -43,6 +43,6 @@ def create_app(config=None):
 
     @app.errorhandler(404)
     def not_found(e):
-        return app.send_from_directory(app.static_folder, 'index.html')
+        return send_from_directory(app.static_folder, 'index.html')
 
     return app
