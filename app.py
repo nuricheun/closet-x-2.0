@@ -1,15 +1,16 @@
 from flask import Flask, send_from_directory
 from flask_pymongo import PyMongo
-from .extensions import mongodb, connection_url, bcrypt, jwtmanager
+from server.extensions import mongodb, connection_url, bcrypt, jwtmanager
 from datetime import timedelta
 from flask_cors import CORS
+import os
 
 
 def register_bp(app):
-    from .users.views import users_bp
-    from .items.views import items_bp
-    from .outfits.views import outfits_bp
-    from .error_handlers import error_handlers
+    from server.users.views import users_bp
+    from server.items.views import items_bp
+    from server.outfits.views import outfits_bp
+    from server.error_handlers import error_handlers
 
     app.register_blueprint(items_bp)
     app.register_blueprint(users_bp)
@@ -18,6 +19,7 @@ def register_bp(app):
 
 
 def create_app(config=None):
+
     app = Flask(__name__, static_url_path='', static_folder='frontend/build')
     CORS(app)  # Comment this on deployment
     app.config.from_object(config)
