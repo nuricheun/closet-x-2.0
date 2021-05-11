@@ -35,7 +35,7 @@ def create_app(config=None):
 
     @app.route('/', methods=["GET"])
     def index():
-        return app.send_from_directory(app.static_folder, 'index.html')
+        return app.send_from_directory('frontend/build', 'index.html')
 
     @app.route('/favicon.ico', methods=["GET"])
     def favicon():
@@ -44,6 +44,6 @@ def create_app(config=None):
 
     @app.errorhandler(404)
     def not_found(e):
-        return app.send_from_directory(app.static_folder, 'index.html')
+        return app.send_from_directory('frontend/build', 'index.html')
 
     return app
