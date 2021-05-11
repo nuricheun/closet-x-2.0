@@ -18,8 +18,7 @@ def register_bp(app):
 
 
 def create_app(config=None):
-    app = Flask(__name__, static_url_path="",
-                static_folder='frontend/build')
+    app = Flask(__name__, static_url_path='', static_folder='frontend/build')
     CORS(app)  # Comment this on deployment
     app.config.from_object(config)
     app.config["MONGO_URI"] = connection_url
@@ -35,7 +34,7 @@ def create_app(config=None):
 
     @app.route('/', methods=["GET"])
     def index():
-        return app.send_from_directory('frontend/build', 'index.html')
+        return app.send_from_directory(app.static_folder, 'index.html')
 
     @app.route('/favicon.ico', methods=["GET"])
     def favicon():
@@ -44,6 +43,6 @@ def create_app(config=None):
 
     @app.errorhandler(404)
     def not_found(e):
-        return app.send_from_directory('frontend/build', 'index.html')
+        return app.send_from_directory(app.static_folder, 'index.html')
 
     return app
