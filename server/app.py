@@ -35,6 +35,7 @@ def create_app(config=None):
     @app.route('/', methods=["GET"])
     def index():
         print(app.static_folder, "are you here?")
+        print(send_from_directory(app.static_folder, 'index.html'))
         return send_from_directory(app.static_folder, 'index.html')
 
     @app.route('/favicon.ico', methods=["GET"])
