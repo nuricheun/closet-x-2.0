@@ -18,7 +18,7 @@ def register_bp(app):
 
 
 def create_app(config=None):
-    app = Flask(__name__, static_folder='frontend/build')
+    app = Flask(__name__, static_url_path='', static_folder='frontend/build')
     CORS(app)  # Comment this on deployment
     app.config.from_object(config)
     app.config["MONGO_URI"] = connection_url
