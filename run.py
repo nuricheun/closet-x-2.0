@@ -7,9 +7,6 @@ app = create_app()
 
 @app.route('/', methods=["GET"])
 def index():
-    print(app.static_folder, "are you here?")
-    # print(filename=safe_join(app.static_folder, 'index.html'))
-    # print(send_from_directory(app.static_folder, '/index.html'))
     return send_from_directory(app.static_folder, 'index.html')
 
 

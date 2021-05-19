@@ -1,10 +1,6 @@
-from flask import Flask, send_from_directory
-from flask_pymongo import PyMongo
-from server.extensions import mongodb, connection_url, bcrypt, jwtmanager
-from server.settings import Config, ProductionConfig
-from datetime import timedelta
+from flask import Flask
+from server.extensions import mongodb, bcrypt, jwtmanager
 from flask_cors import CORS
-import os
 
 
 def register_bp(app):
@@ -20,20 +16,16 @@ def register_bp(app):
 
 
 def create_app():
-
     app = Flask(__name__, static_url_path='', static_folder='frontend/build')
-    CORS(app)  # Comment this on deployment
+
     if app.config["ENV"] == "production":
-        app.config.from_object("settings.ProductionConfig")
+        app.config.from_object("server.settings.ProductionConfig")
     else:
-        app.config.from_object("settings.DevelopmentConfig")
+        CORS(app)  # Comment this on deployment
+        app.config.from_object("server.settings.ProductionConfig")
+    
 
-    # app.config["MONGO_URI"] = connection_url
-    # app.config["JWT_SECRET_KEY"] = "heyheyhey"
-    # app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
-    # app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
-
-    print(app.config)
+    
 
     mongodb.init_app(app)
     bcrypt.init_app(app)
