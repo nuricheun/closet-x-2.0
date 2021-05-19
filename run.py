@@ -1,6 +1,7 @@
 import os
 from flask import send_from_directory
 from app import create_app
+
 app = create_app()
 
 
